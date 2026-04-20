@@ -47,7 +47,7 @@ export default function Home() {
             <span className="text-primary">EDUCATION</span><br />
             TRUST
           </h1>
-              <p className="text-gray-300 text-lg max-w-xl mb-10 leading-relaxed">
+          <p className="text-gray-300 text-lg max-w-xl mb-10 leading-relaxed">
             Excellence in education since 1998. We nurture every child's unique potential in a caring, future-ready community.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -72,12 +72,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Case to Story</p>
-             <h2 className="font-heading text-5xl font-bold text-gray-900 mb-6 leading-tight uppercase">
-               WELCOME TO <span className="text-primary">SHAKTI</span> EDUCATION TRUST
-             </h2>
-             <p className="text-gray-600 leading-relaxed mb-4">
-               At Shakti Education trust, our team is committed to provide the very best for every child and create ever-better learning outcomes with a caring environment where everyone feels happy, safe, and secure.
-             </p>
+            <h2 className="font-heading text-5xl font-bold text-gray-900 mb-6 leading-tight uppercase">
+              WELCOME TO <span className="text-primary">SHAKTI</span> EDUCATION TRUST
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              At Shakti Education trust, our team is committed to provide the very best for every child and create ever-better learning outcomes with a caring environment where everyone feels happy, safe, and secure.
+            </p>
             <p className="text-gray-600 leading-relaxed mb-6">
               With dedication and support from well-experienced professional staff, every child is guided and motivated to develop their full potential in all areas of education. We encourage active participation from parents, teachers and community members.
             </p>

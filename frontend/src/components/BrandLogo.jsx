@@ -10,7 +10,7 @@ export default function BrandLogo({
     <div className={`flex items-center gap-3 ${className}`}>
       <img
         src={SHAKTI_LOGO_URL}
-        alt="Shakti Pumps logo"
+        alt="Shakti Education trust logo"
         className={`h-9 w-auto object-contain ${imageClassName}`}
         loading="lazy"
       />
