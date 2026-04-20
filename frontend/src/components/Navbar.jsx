@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import BrandLogo from './BrandLogo'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -41,13 +42,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-heading font-bold text-lg">
-            CBS
-          </div>
-          <div className="hidden sm:block">
-            <p className="font-heading font-bold text-gray-900 leading-none text-sm">CANADIAN BILINGUAL</p>
-            <p className="text-xs text-gray-500 tracking-widest">SCHOOL</p>
-          </div>
+          <BrandLogo
+            textClassName="text-gray-900 text-sm"
+            imageClassName="h-10"
+          />
         </Link>
 
         {/* Desktop links */}

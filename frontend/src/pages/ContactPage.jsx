@@ -21,9 +21,9 @@ export default function ContactPage() {
           <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
             <h2 className="font-heading text-3xl font-bold text-gray-900 uppercase mb-5">Contact Details</h2>
             <div className="space-y-4 text-gray-700">
-              <p><span className="font-semibold">Address:</span> 123 School Ave, Ottawa, Canada</p>
-              <p><span className="font-semibold">Phone:</span> +1 (555) 123-4567</p>
-              <p><span className="font-semibold">Email:</span> info@cbs.edu.ca</p>
+              <p><span className="font-semibold">Address:</span> 123 Education Avenue, Indore, India</p>
+              <p><span className="font-semibold">Phone:</span> +91 731 000 0000</p>
+              <p><span className="font-semibold">Email:</span> info@shaktieducationtrust.org</p>
               <p><span className="font-semibold">Office Hours:</span> Monday to Friday, 8:00 AM - 4:00 PM</p>
             </div>
           </div>

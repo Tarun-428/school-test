@@ -183,7 +183,7 @@ export default function Students() {
             <div>
               <label className="label">Student ID *</label>
               <input name="student_id" value={form.student_id} onChange={handleChange}
-                required className={fieldClass} placeholder="CBS001" />
+                required className={fieldClass} placeholder="SET001" />
             </div>
             <div>
               <label className="label">Full Name *</label>
