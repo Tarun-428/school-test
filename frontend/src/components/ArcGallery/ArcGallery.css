@@ -1,0 +1,174 @@
+.arc-section {
+  position: relative;
+  width: 100%;
+  height: 78vh;
+  min-height: 520px;
+  background: #111111;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.arc-section:active {
+  cursor: grabbing;
+}
+
+.arc-track {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.arc-track--loaded {
+  opacity: 1;
+}
+
+.arc-card {
+  position: absolute;
+  width: 140px;
+  height: 190px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  will-change: transform;
+  transform: translate(-50%, -50%);
+  border: 2.5px solid rgba(255, 255, 255, 0.12);
+  transition: box-shadow 0.2s ease;
+}
+
+.arc-card:hover {
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.7),
+    0 4px 16px rgba(255, 255, 255, 0.1);
+}
+
+.arc-hero {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  padding-bottom: 0;
+  transform: translateY(6px);
+}
+
+.arc-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.arc-headline {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.05;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.arc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e8302a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  padding: 0.72rem 1.7rem;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.arc-cta:hover {
+  background: #c0201a;
+  transform: scale(1.05);
+}
+
+.arc-cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 0.9rem;
+}
+
+.deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.35;
+  user-select: none;
+}
+
+.deco-heart {
+  color: #e8302a;
+  font-size: 1.4rem;
+}
+
+.deco-star {
+  color: #e8302a;
+  font-size: 1.2rem;
+}
+
+.deco-1 { top: 12%; left: 6%; }
+.deco-2 { top: 18%; right: 7%; }
+.deco-3 { top: 8%; right: 12%; }
+.deco-4 { top: 5%; left: 14%; }
+
+@media (max-width: 768px) {
+  .arc-section {
+    height: 70vh;
+    min-height: 460px;
+  }
+
+  .arc-track {
+    top: 62%;
+  }
+
+  .arc-card {
+    width: 100px;
+    height: 140px;
+    border-radius: 10px;
+  }
+
+  .arc-headline {
+    font-size: clamp(1.85rem, 8vw, 2.8rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .arc-section {
+    height: 66vh;
+    min-height: 420px;
+  }
+
+  .arc-track {
+    top: 64%;
+  }
+
+  .arc-card {
+    width: 80px;
+    height: 115px;
+    border-radius: 8px;
+  }
+
+  .arc-hero {
+    transform: translateY(0);
+  }
+}
