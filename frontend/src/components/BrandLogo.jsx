@@ -1,4 +1,4 @@
-const SHAKTI_LOGO_URL = 'https://github.com/user-attachments/assets/cf10aba5-3834-4eeb-a8d8-fdafb58a16cc'
+import logo from '../assets/shaktipump-new-logo.png'
 
 export default function BrandLogo({
   showText = true,
@@ -9,7 +9,7 @@ export default function BrandLogo({
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <img
-        src={SHAKTI_LOGO_URL}
+        src={logo}
         alt="Shakti Education trust logo"
         className={`h-9 w-auto object-contain ${imageClassName}`}
         loading="lazy"
