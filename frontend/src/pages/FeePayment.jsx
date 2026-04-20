@@ -49,7 +49,7 @@ export default function FeePayment() {
         key: data.razorpay_key_id,
         amount: data.amount,
         currency: 'INR',
-        name: 'Canadian Bilingual School',
+        name: 'Shakti Education trust',
         description: `Fee payment for ${student.name}`,
         order_id: data.order_id,
         handler: async (response) => {
@@ -66,7 +66,7 @@ export default function FeePayment() {
           }
         },
         prefill: { name: student.name },
-        theme: { color: '#DC2626' },
+        theme: { color: '#0A84D8' },
         modal: { ondismiss: () => setPaying(false) },
       }
       new window.Razorpay(options).open()
@@ -84,7 +84,7 @@ export default function FeePayment() {
         <div className="bg-dark text-white relative overflow-hidden flex flex-col" style={{ minHeight: '52vh' }}>
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-primary" />
           <div className="flex-1 flex flex-col items-center justify-center text-center px-8 pt-28 pb-6">
-            <p className="text-primary text-xs tracking-[0.3em] uppercase font-semibold mb-4">Canadian Bilingual School</p>
+            <p className="text-primary text-xs tracking-[0.3em] uppercase font-semibold mb-4">Shakti Education trust</p>
             <h1 className="font-heading text-5xl font-bold uppercase mb-3">FEE PAYMENT PORTAL</h1>
             <p className="text-gray-400 mb-6">Search your student ID to view and pay fees securely</p>
             <p className="font-heading text-6xl md:text-7xl font-bold text-primary uppercase leading-none">WORK TOGETHER</p>
@@ -103,7 +103,7 @@ export default function FeePayment() {
               <input
                 value={studentId}
                 onChange={e => setStudentId(e.target.value)}
-                placeholder="e.g. CBS001"
+                placeholder="e.g. SET001"
                 required
                 className="input flex-1 text-base"
               />

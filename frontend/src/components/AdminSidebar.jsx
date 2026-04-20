@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
+import BrandLogo from './BrandLogo'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: '⊞', end: true },
@@ -22,12 +23,9 @@ export default function AdminSidebar() {
     <aside className="w-64 min-h-screen bg-dark flex flex-col">
       {/* Brand */}
       <div className="px-6 py-5 border-b border-gray-800">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-primary rounded-full flex items-center justify-center text-white font-heading font-bold text-sm">CBS</div>
-          <div>
-            <p className="font-heading font-bold text-white text-sm leading-none">ADMIN PANEL</p>
-            <p className="text-gray-500 text-xs">Canadian Bilingual School</p>
-          </div>
+        <div className="space-y-2">
+          <BrandLogo textClassName="text-white text-sm" imageClassName="h-8" />
+          <p className="text-gray-500 text-xs pl-1">Admin Panel</p>
         </div>
       </div>
 
@@ -56,7 +54,7 @@ export default function AdminSidebar() {
       <div className="px-3 pb-6">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-red-900/30 hover:text-red-400 transition"
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-primary/20 hover:text-primary-light transition"
         >
           <span>🚪</span> Logout
         </button>

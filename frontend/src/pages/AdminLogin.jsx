@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
+import BrandLogo from '../components/BrandLogo'
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('')
@@ -32,11 +33,7 @@ export default function AdminLogin() {
         <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary" />
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-12">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-heading font-bold">CBS</div>
-            <div>
-              <p className="font-heading font-bold text-white text-lg leading-none">CANADIAN BILINGUAL</p>
-              <p className="text-gray-400 text-xs tracking-widest">SCHOOL MANAGEMENT</p>
-            </div>
+            <BrandLogo textClassName="text-white text-lg" imageClassName="h-12" />
           </div>
           <h1 className="font-heading text-6xl font-bold text-white leading-tight uppercase mb-6">
             ADMIN<br/>
@@ -67,8 +64,7 @@ export default function AdminLogin() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-heading font-bold">CBS</div>
-            <p className="font-heading font-bold text-white text-lg">CANADIAN BILINGUAL SCHOOL</p>
+            <BrandLogo textClassName="text-white text-lg" imageClassName="h-10" />
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-10 border border-gray-800">
@@ -120,7 +116,7 @@ export default function AdminLogin() {
           </div>
 
           <p className="text-center text-gray-600 text-xs mt-6">
-            © {new Date().getFullYear()} Canadian Bilingual School. Admin access only.
+            © {new Date().getFullYear()} Shakti Education trust. Admin access only.
           </p>
         </div>
       </div>

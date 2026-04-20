@@ -11,17 +11,17 @@ const features = [
 ]
 
 const testimonials = [
-  { name: 'Ms. Jenna Blemas', role: 'Parent', text: 'I would like to thank CBS administration for giving us the chance to share our experience. I have seen huge improvement in English language and Arabic language with my children.' },
-  { name: 'Mr. Ravi Sharma', role: 'Parent', text: 'The teachers are exceptional. My daughter joined CBS in Grade 3 and has flourished academically and socially. Highly recommended school!' },
-  { name: 'Dr. Aisha Malik', role: 'Parent', text: 'World-class facilities combined with compassionate teaching staff. CBS truly lives up to its reputation for excellence.' },
+  { name: 'Ms. Jenna Blemas', role: 'Parent', text: 'I would like to thank Shakti Education trust administration for giving us the chance to share our experience. I have seen huge improvement in English language and Arabic language with my children.' },
+  { name: 'Mr. Ravi Sharma', role: 'Parent', text: 'The teachers are exceptional. My daughter joined Shakti Education trust in Grade 3 and has flourished academically and socially. Highly recommended school!' },
+  { name: 'Dr. Aisha Malik', role: 'Parent', text: 'World-class facilities combined with compassionate teaching staff. Shakti Education trust truly lives up to its reputation for excellence.' },
 ]
 
 const calendarEvents = [
-  { date: 'Sep 1', label: 'First Installment Fees Due', color: 'bg-red-500' },
-  { date: 'Sep 3', label: 'First Day of School — Gr 3–12', color: 'bg-blue-500' },
-  { date: 'Sep 5', label: 'First Day of School — Gr K–2', color: 'bg-green-500' },
-  { date: 'Sep 10', label: 'KG Extended Day Program Begins', color: 'bg-purple-500' },
-  { date: 'Sep 20', label: 'Parent Open House', color: 'bg-orange-500' },
+  { date: 'Sep 1', label: 'First Installment Fees Due', color: 'bg-blue-700' },
+  { date: 'Sep 3', label: 'First Day of School — Gr 3–12', color: 'bg-sky-600' },
+  { date: 'Sep 5', label: 'First Day of School — Gr K–2', color: 'bg-cyan-500' },
+  { date: 'Sep 10', label: 'KG Extended Day Program Begins', color: 'bg-blue-500' },
+  { date: 'Sep 20', label: 'Parent Open House', color: 'bg-indigo-500' },
 ]
 
 export default function Home() {
@@ -43,12 +43,12 @@ export default function Home() {
             Bringing Talent to Life
           </p>
           <h1 className="font-heading text-6xl md:text-8xl font-bold text-white leading-none mb-6 uppercase">
-            CANADIAN<br />
-            <span className="text-primary">BILINGUAL</span><br />
-            SCHOOL
+            SHAKTI<br />
+            <span className="text-primary">EDUCATION</span><br />
+            TRUST
           </h1>
           <p className="text-gray-300 text-lg max-w-xl mb-10 leading-relaxed">
-            Excellence in bilingual education since 1998. We nurture every child's unique potential in a caring, internationally-minded community.
+            Excellence in education since 1998. We nurture every child's unique potential in a caring, future-ready community.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link to="/fee-payment" className="btn-primary text-base px-8 py-4">
@@ -73,10 +73,10 @@ export default function Home() {
           <div>
             <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Case to Story</p>
             <h2 className="font-heading text-5xl font-bold text-gray-900 mb-6 leading-tight uppercase">
-              WELCOME TO <span className="text-primary">CANADIAN</span> BILINGUAL SCHOOL
+              WELCOME TO <span className="text-primary">SHAKTI</span> EDUCATION TRUST
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              At Canadian Bilingual School, our team is committed to provide the very best for every child and create ever-better learning outcomes with a caring environment where everyone feels happy, safe, and secure.
+              At Shakti Education trust, our team is committed to provide the very best for every child and create ever-better learning outcomes with a caring environment where everyone feels happy, safe, and secure.
             </p>
             <p className="text-gray-600 leading-relaxed mb-6">
               With dedication and support from well-experienced professional staff, every child is guided and motivated to develop their full potential in all areas of education. We encourage active participation from parents, teachers and community members.
@@ -103,7 +103,7 @@ export default function Home() {
       <section id="academics" className="py-20 bg-dark">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-14">
-            <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-2">Choose CBS?</p>
+            <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-2">Choose Shakti?</p>
             <h2 className="font-heading text-5xl font-bold text-white uppercase">WHY LEARN WITH US?</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -111,7 +111,7 @@ export default function Home() {
               <div key={i} className="group bg-gray-900 rounded-2xl p-6 hover:bg-primary transition-all duration-300 cursor-default">
                 <div className="text-4xl mb-4">{f.icon}</div>
                 <h3 className="font-heading text-xl font-bold text-white uppercase mb-2">{f.title}</h3>
-                <p className="text-gray-400 group-hover:text-red-100 text-sm leading-relaxed transition">{f.desc}</p>
+                <p className="text-gray-400 group-hover:text-blue-100 text-sm leading-relaxed transition">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -205,15 +205,15 @@ export default function Home() {
             {[
               { icon: '📋', title: 'Registration Enquiry', desc: 'New students may click the link below to submit an inquiry form for admission.' },
               { icon: '💰', title: 'Fee Payment', desc: 'Parents can click the link below and pay fee online. Online payment is safe and secure.' },
-              { icon: '👨‍👩‍👧', title: 'Parent Portal', desc: 'Parents of current CBS students can access the parent portal.' },
-              { icon: '🔄', title: 'Online Re-Registration', desc: 'Parents of current CBS students may re-register online for the next academic year.' },
+              { icon: '👨‍👩‍👧', title: 'Parent Portal', desc: 'Parents of current Shakti Education trust students can access the parent portal.' },
+              { icon: '🔄', title: 'Online Re-Registration', desc: 'Parents of current Shakti Education trust students may re-register online for the next academic year.' },
             ].map((item, i) => (
               <div key={i} className={`rounded-2xl p-6 border-2 ${i === 1 ? 'bg-primary border-primary text-white' : 'bg-white border-gray-200 hover:border-primary transition'}`}>
                 <div className="text-3xl mb-3">{item.icon}</div>
                 <h3 className={`font-heading font-bold text-lg mb-2 uppercase ${i === 1 ? 'text-white' : 'text-gray-900'}`}>{item.title}</h3>
-                <p className={`text-sm leading-relaxed ${i === 1 ? 'text-red-100' : 'text-gray-500'}`}>{item.desc}</p>
+                <p className={`text-sm leading-relaxed ${i === 1 ? 'text-blue-100' : 'text-gray-500'}`}>{item.desc}</p>
                 {i === 1 && (
-                  <Link to="/fee-payment" className="mt-4 inline-block bg-white text-primary text-sm font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition">
+                  <Link to="/fee-payment" className="mt-4 inline-block bg-white text-primary text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary-light transition">
                     Pay Now →
                   </Link>
                 )}
