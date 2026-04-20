@@ -81,14 +81,20 @@ export default function FeePayment() {
       <Navbar />
       <div className="pt-16">
         {/* Hero bar */}
-        <div className="bg-dark py-14 text-white text-center relative overflow-hidden">
+        <div className="bg-dark text-white relative overflow-hidden flex flex-col" style={{ minHeight: '52vh' }}>
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-primary" />
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-semibold mb-2">Canadian Bilingual School</p>
-          <h1 className="font-heading text-5xl font-bold uppercase">FEE PAYMENT PORTAL</h1>
-          <p className="text-gray-400 mt-2">Search your student ID to view and pay fees securely</p>
+          <div className="flex-1 flex flex-col items-center justify-center text-center px-8 pt-28 pb-6">
+            <p className="text-primary text-xs tracking-[0.3em] uppercase font-semibold mb-4">Canadian Bilingual School</p>
+            <h1 className="font-heading text-5xl font-bold uppercase mb-3">FEE PAYMENT PORTAL</h1>
+            <p className="text-gray-400 mb-6">Search your student ID to view and pay fees securely</p>
+            <p className="font-heading text-6xl md:text-7xl font-bold text-primary uppercase leading-none">WORK TOGETHER</p>
+          </div>
+          <div className="flex justify-center pb-10">
+            <a href="#fee-search" className="btn-primary text-base px-10 py-4 uppercase font-bold tracking-widest">PAY FEES NOW</a>
+          </div>
         </div>
 
-        <div className="max-w-2xl mx-auto px-4 py-12">
+        <div id="fee-search" className="max-w-2xl mx-auto px-4 py-12">
           {/* Search card */}
           <div className="card p-8 mb-6">
             <h2 className="font-heading text-2xl font-bold text-gray-900 mb-1 uppercase">Find Student</h2>
