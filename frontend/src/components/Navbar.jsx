@@ -31,6 +31,8 @@ export default function Navbar() {
     { to: '/fee-payment', label: 'Fee Payment' },
     { to: '/about', label: 'About Us' },
     { to: '/academics', label: 'Academics' },
+    { to: '/faculty', label: 'Faculty' },
+    { to: '/certificates', label: 'Certificates' },
     { to: '/gallery', label: 'Gallery' },
     { to: '/contact', label: 'Contact' },
   ]

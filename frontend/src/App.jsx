@@ -7,6 +7,8 @@ import AboutPage from './pages/AboutPage'
 import AcademicsPage from './pages/AcademicsPage'
 import ContactPage from './pages/ContactPage'
 import PublicGalleryPage from './pages/PublicGalleryPage'
+import PublicFacultyPage from './pages/PublicFacultyPage'
+import CertificatesPage from './pages/CertificatesPage'
 import AdminLogin from './pages/AdminLogin'
 import Dashboard from './pages/Dashboard'
 import Students from './pages/Students'
@@ -23,6 +25,8 @@ export default function App() {
           <Route path="/fee-payment" element={<FeePayment />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/academics" element={<AcademicsPage />} />
+          <Route path="/faculty" element={<PublicFacultyPage />} />
+          <Route path="/certificates" element={<CertificatesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/gallery" element={<PublicGalleryPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
