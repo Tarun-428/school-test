@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: '#DC2626', dark: '#B91C1C', light: '#FEE2E2' },
-        dark: { DEFAULT: '#111111', card: '#1a1a1a' },
+        primary: { DEFAULT: '#0A84D8', dark: '#066BB2', light: '#E8F5FF' },
+        dark: { DEFAULT: '#031A2D', card: '#0A2944' },
       },
       fontFamily: {
         heading: ['Oswald', 'sans-serif'],

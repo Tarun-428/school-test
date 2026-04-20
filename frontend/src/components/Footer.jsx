@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom'
+import BrandLogo from './BrandLogo'
 
 export default function Footer() {
   return (
     <footer className="bg-dark text-white">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="md:col-span-1">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-heading font-bold">CBS</div>
-            <span className="font-heading font-bold text-lg">CANADIAN<br/>BILINGUAL SCHOOL</span>
-          </div>
+          <BrandLogo className="mb-4" textClassName="text-white text-lg" imageClassName="h-10" />
           <p className="text-gray-400 text-sm leading-relaxed">
-            Bringing talent to life. We provide world-class bilingual education with a caring, nurturing environment.
+            Bringing talent to life. We provide world-class education with a caring, nurturing environment.
           </p>
         </div>
 
@@ -35,9 +33,9 @@ export default function Footer() {
         <div>
           <h4 className="font-heading font-semibold text-lg mb-4 text-primary">CONTACT US</h4>
           <ul className="space-y-2 text-sm text-gray-400">
-            <li>📍 123 School Ave, Ottawa, Canada</li>
-            <li>📞 +1 (555) 123-4567</li>
-            <li>✉️ info@cbs.edu.ca</li>
+            <li>📍 123 Education Avenue, Indore, India</li>
+            <li>📞 +91 731 000 0000</li>
+            <li>✉️ info@shaktieducationtrust.org</li>
           </ul>
           <div className="flex gap-3 mt-4">
             {['f','in','▶'].map(s => (
@@ -50,7 +48,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-800 text-center text-xs text-gray-500 py-4">
-        © {new Date().getFullYear()} Canadian Bilingual School. All rights reserved.
+        © {new Date().getFullYear()} Shakti Education trust. All rights reserved.
       </div>
     </footer>
   )
