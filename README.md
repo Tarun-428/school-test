@@ -1,6 +1,6 @@
-# 🏫 Canadian Bilingual School — Management App
+# 🏫 Shakti Education Trust — Educational Platform
 
-A full-stack school management system with Django REST backend and React frontend.
+A full-stack educational platform with Django REST backend and React frontend, featuring IIT-JEE / NEET UG coaching content, enquiry management, scholarship registration, blog, and more.
 
 ## Tech Stack
 - **Backend:** Django 4.2 + Django REST Framework + PostgreSQL
@@ -21,6 +21,9 @@ school-app/
 │   ├── faculty/           # Faculty CRUD
 │   ├── payments/          # Razorpay order + verify
 │   ├── gallery/           # Cloudinary image gallery
+│   ├── blog/              # Blog posts (exam tips, career guidance, news)
+│   ├── courses/           # Course listings (IIT-JEE, NEET, Foundation)
+│   ├── enquiries/         # Enquiry forms + Counselling appointment booking
 │   ├── requirements.txt
 │   ├── manage.py
 │   └── build.sh           # Render build script
@@ -29,13 +32,28 @@ school-app/
     ├── src/
     │   ├── auth/          # JWT AuthContext
     │   ├── services/      # Axios API service layer
-    │   ├── components/    # Navbar, Footer, Sidebar, Modal, Layout
-    │   └── pages/         # Home, FeePayment, Admin pages
+    │   ├── components/    # Navbar, Footer, WhatsAppButton, Sidebar, Modal
+    │   └── pages/         # Home, About, Courses, Scholarship, Blog, Contact, Faculty, Gallery, Admin pages
     ├── index.html
     ├── vite.config.js
     ├── tailwind.config.js
     └── vercel.json
 ```
+
+---
+
+## 🌐 Public Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — Hero, courses overview, results, testimonials, quick enquiry |
+| `/about` | About Us — Trust intro, vision/mission, leadership, infrastructure |
+| `/courses` | Courses — IIT-JEE, NEET UG, Foundation, Scholarship Prep |
+| `/scholarship` | Scholarship Exam — SETSE overview, syllabus, registration form |
+| `/faculty` | Faculty — Profiles, qualifications, expertise |
+| `/gallery` | Gallery — Classroom activities, events, achievements |
+| `/blog` | Blog — Exam tips, career guidance, news & announcements |
+| `/contact` | Contact & Counselling — Maps, enquiry form, appointment booking |
 
 ---
 
@@ -61,7 +79,7 @@ cp .env.example .env
 python manage.py createsuperuser
 
 # Run migrations and start server
-python manage.py makemigrations students faculty payments gallery
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
@@ -79,6 +97,7 @@ npm install
 # Copy and fill environment variables
 cp .env.example .env
 # Set VITE_API_URL=http://localhost:8000
+# Set VITE_WHATSAPP_NUMBER=91XXXXXXXXXX
 
 # Start dev server
 npm run dev
@@ -102,6 +121,14 @@ Frontend runs at: `http://localhost:5173`
 | POST | `/api/payments/create-order/` | None | Create Razorpay order |
 | POST | `/api/payments/verify/` | None | Verify payment signature |
 | GET | `/api/payments/transactions/` | Admin JWT | All transactions |
+| GET | `/api/blog/` | None | List published blog posts |
+| POST | `/api/blog/` | Admin JWT | Create blog post |
+| GET | `/api/courses/` | None | List active courses |
+| POST | `/api/courses/` | Admin JWT | Create course |
+| POST | `/api/contact/enquiries/` | None | Submit enquiry |
+| GET | `/api/contact/enquiries/` | Admin JWT | List all enquiries |
+| POST | `/api/contact/appointments/` | None | Book counselling appointment |
+| GET | `/api/contact/appointments/` | Admin JWT | List all appointments |
 
 ---
 
@@ -131,6 +158,7 @@ Frontend runs at: `http://localhost:5173`
 5. Add environment variables:
    - `VITE_API_URL` = your Render backend URL
    - `VITE_RAZORPAY_KEY_ID` = your Razorpay public key
+   - `VITE_WHATSAPP_NUMBER` = your WhatsApp number (country code + number, no +)
 6. Deploy!
 
 ---
@@ -143,6 +171,7 @@ Frontend runs at: `http://localhost:5173`
 - All admin routes are **JWT-protected**
 - CORS is restricted to your frontend domain only
 - Secrets stored in **environment variables**, never in code
+- Enquiry / Appointment endpoints are public (POST only); listing requires authentication
 
 ---
 

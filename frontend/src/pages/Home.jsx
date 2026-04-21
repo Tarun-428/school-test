@@ -1,13 +1,30 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ArcGallery from '../components/ArcGallery/ArcGallery'
+import WhatsAppButton from '../components/WhatsAppButton'
+import { enquiryService } from '../services'
 
 const features = [
-  { icon: '🏫', title: 'Boutique School', desc: 'Small class sizes ensuring personal attention for every student.' },
-  { icon: '🌍', title: 'International Education', desc: 'Globally recognised curriculum with bilingual excellence.' },
-  { icon: '📚', title: 'American Core Curriculum', desc: 'Rigorous standards aligned with American academic benchmarks.' },
-  { icon: '🚀', title: 'Door to a Bright Future', desc: 'Preparing students for top universities worldwide.' },
+  { icon: '⚙️', title: 'IIT-JEE Preparation', desc: 'Comprehensive Physics, Chemistry & Maths coaching for IIT-JEE Main & Advanced.' },
+  { icon: '🏥', title: 'NEET UG Coaching', desc: 'NCERT-focused Biology, Physics & Chemistry programme for NEET aspirants.' },
+  { icon: '📚', title: 'Foundation Course', desc: 'Build analytical skills and competitive edge from Class 8 onwards.' },
+  { icon: '🏆', title: 'Scholarship Exam', desc: 'Earn up to 100% scholarship on course fees through our SETSE exam.' },
+]
+
+const courseHighlights = [
+  { icon: '⚙️', title: 'IIT-JEE', badge: '2-Year & 1-Year', color: 'bg-blue-600', link: '/courses' },
+  { icon: '🏥', title: 'NEET UG', badge: '2-Year & 1-Year', color: 'bg-green-600', link: '/courses' },
+  { icon: '📚', title: 'Foundation', badge: 'Class 8–10', color: 'bg-purple-600', link: '/courses' },
+  { icon: '🏆', title: 'Scholarship Prep', badge: '3 Months', color: 'bg-yellow-500', link: '/scholarship' },
+]
+
+const results = [
+  { number: '50+', label: 'IIT Selections (2025)' },
+  { number: '80+', label: 'NEET Qualifiers (2025)' },
+  { number: '100%', label: 'Max Scholarship Available' },
+  { number: '25+', label: 'Years of Excellence' },
 ]
 
 const testimonials = [
@@ -25,9 +42,28 @@ const calendarEvents = [
 ]
 
 export default function Home() {
+  const [enqForm, setEnqForm] = useState({ name: '', phone: '', course_interest: 'general' })
+  const [enqStatus, setEnqStatus] = useState('')
+
+  const handleEnqChange = (e) => setEnqForm(f => ({ ...f, [e.target.name]: e.target.value }))
+
+  const handleEnqSubmit = async (e) => {
+    e.preventDefault()
+    if (!enqForm.name || !enqForm.phone) return
+    setEnqStatus('loading')
+    try {
+      await enquiryService.submit({ ...enqForm, source: 'website' })
+      setEnqStatus('success')
+      setEnqForm({ name: '', phone: '', course_interest: 'general' })
+    } catch {
+      setEnqStatus('error')
+    }
+  }
+
   return (
     <div className="font-body">
       <Navbar />
+      <WhatsAppButton />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center bg-dark overflow-hidden pt-16">
@@ -51,12 +87,12 @@ export default function Home() {
             Excellence in education since 1998. We nurture every child's unique potential in a caring, future-ready community.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/fee-payment" className="btn-primary text-base px-8 py-4">
-              PAY FEES ONLINE
+            <Link to="/courses" className="btn-primary text-base px-8 py-4">
+              EXPLORE COURSES
             </Link>
-            <a href="#about" className="btn-outline text-base px-8 py-4">
-              ABOUT US
-            </a>
+            <Link to="/scholarship" className="btn-outline text-base px-8 py-4">
+              WIN SCHOLARSHIP
+            </Link>
           </div>
         </div>
 
@@ -81,7 +117,7 @@ export default function Home() {
             <p className="text-gray-600 leading-relaxed mb-6">
               With dedication and support from well-experienced professional staff, every child is guided and motivated to develop their full potential in all areas of education. We encourage active participation from parents, teachers and community members.
             </p>
-            <Link to="/fee-payment" className="btn-primary inline-flex">
+            <Link to="/contact" className="btn-primary inline-flex">
               ENQUIRE NOW →
             </Link>
           </div>
@@ -95,6 +131,58 @@ export default function Home() {
               <p className="font-heading text-4xl font-bold">25+</p>
               <p className="text-sm font-medium">Years of Excellence</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Courses Overview ─────────────────────────────────────── */}
+      <section id="courses" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-14">
+            <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-2">Programmes</p>
+            <h2 className="font-heading text-5xl font-bold text-gray-900 uppercase">OUR COURSES</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            {courseHighlights.map((c) => (
+              <Link
+                key={c.title}
+                to={c.link}
+                className={`${c.color} text-white rounded-2xl p-6 flex flex-col items-start gap-3 hover:opacity-90 transition shadow-md`}
+              >
+                <span className="text-4xl">{c.icon}</span>
+                <div>
+                  <p className="font-heading text-xl font-bold uppercase">{c.title}</p>
+                  <p className="text-sm opacity-80">{c.badge}</p>
+                </div>
+                <span className="mt-auto text-sm font-semibold underline">Learn More →</span>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link to="/courses" className="btn-primary px-8 py-3">View All Courses & Fees</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Results & Achievements ────────────────────────────────── */}
+      <section className="py-16 bg-primary text-white">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-12">
+            <p className="text-blue-200 text-xs font-semibold tracking-[0.3em] uppercase mb-2">Results</p>
+            <h2 className="font-heading text-5xl font-bold uppercase">OUR ACHIEVEMENTS</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {results.map((r) => (
+              <div key={r.label} className="text-center">
+                <p className="font-heading text-5xl font-bold mb-2">{r.number}</p>
+                <p className="text-blue-100 text-sm font-medium">{r.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/scholarship" className="bg-white text-primary font-bold px-8 py-3 rounded-xl hover:bg-gray-100 transition inline-block">
+              Apply for Scholarship →
+            </Link>
           </div>
         </div>
       </section>
@@ -220,6 +308,75 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Quick Enquiry Form ───────────────────────────────────── */}
+      <section className="py-20 bg-dark text-white">
+        <div className="max-w-5xl mx-auto px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Get Started</p>
+            <h2 className="font-heading text-4xl font-bold uppercase mb-4">
+              Start Your <span className="text-primary">Success Journey</span> Today
+            </h2>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              Drop your details and our counsellor will reach out within 24 hours to guide you towards the
+              right course and help you win a scholarship.
+            </p>
+            <a
+              href="https://wa.me/919100000000?text=Hello%2C%20I%20want%20to%20enquire%20about%20courses"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl transition"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-white">
+                <path d="M16.004 2C8.28 2 2 8.278 2 16c0 2.44.638 4.73 1.752 6.718L2 30l7.476-1.732A13.935 13.935 0 0 0 16.004 30C23.726 30 30 23.724 30 16 30 8.278 23.726 2 16.004 2zm0 2.154c6.534 0 11.842 5.306 11.842 11.846 0 6.538-5.308 11.844-11.842 11.844a11.78 11.78 0 0 1-5.998-1.638l-.43-.258-4.44 1.028.99-4.32-.282-.446A11.78 11.78 0 0 1 4.162 16c0-6.54 5.31-11.846 11.842-11.846zm-3.22 5.44a1.23 1.23 0 0 0-.87.396c-.3.326-1.14 1.11-1.14 2.71 0 1.6 1.164 3.144 1.326 3.36.162.216 2.28 3.488 5.526 4.754 2.718 1.068 3.27.856 3.858.8.588-.056 1.9-.776 2.168-1.524.27-.748.27-1.388.19-1.524-.08-.134-.294-.214-.618-.374-.324-.162-1.9-.938-2.196-1.044-.296-.108-.512-.162-.728.162-.216.324-.836 1.044-1.024 1.26-.188.216-.376.244-.7.082-.324-.162-1.366-.504-2.602-1.604-.962-.854-1.612-1.912-1.8-2.234-.188-.324-.02-.5.142-.66.146-.144.324-.374.486-.562.16-.188.212-.324.318-.54.106-.216.054-.406-.026-.568-.08-.162-.716-1.728-.98-2.368-.258-.622-.522-.524-.728-.532-.188-.006-.404-.008-.62-.008z" />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+
+          {enqStatus === 'success' ? (
+            <div className="bg-gray-800 rounded-2xl p-8 text-center border border-gray-700">
+              <div className="text-5xl mb-4">🎉</div>
+              <h3 className="font-heading text-2xl font-bold mb-2">Enquiry Received!</h3>
+              <p className="text-gray-400 mb-5">Our counsellor will call you within 24 hours.</p>
+              <button onClick={() => setEnqStatus('')} className="btn-primary">Submit Another →</button>
+            </div>
+          ) : (
+            <form onSubmit={handleEnqSubmit} className="bg-gray-800 rounded-2xl p-8 border border-gray-700 space-y-4">
+              <h3 className="font-heading text-xl font-bold uppercase">Quick Enquiry</h3>
+
+              <input
+                name="name" value={enqForm.name} onChange={handleEnqChange} required
+                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+                placeholder="Your Name *"
+              />
+              <input
+                name="phone" value={enqForm.phone} onChange={handleEnqChange} required
+                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+                placeholder="Phone Number *"
+              />
+              <select
+                name="course_interest" value={enqForm.course_interest} onChange={handleEnqChange}
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+              >
+                <option value="general">General Enquiry</option>
+                <option value="iit_jee">IIT-JEE</option>
+                <option value="neet_ug">NEET UG</option>
+                <option value="foundation">Foundation (Class 8–10)</option>
+                <option value="scholarship">Scholarship Exam</option>
+              </select>
+
+              {enqStatus === 'error' && (
+                <p className="text-red-400 text-xs">Submission failed. Please call us directly.</p>
+              )}
+
+              <button type="submit" disabled={enqStatus === 'loading'} className="btn-primary w-full py-3">
+                {enqStatus === 'loading' ? 'Sending…' : 'Get Free Counselling →'}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
