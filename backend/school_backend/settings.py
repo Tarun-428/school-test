@@ -207,7 +207,9 @@ CORS_ALLOW_METHODS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://3.108.196.134/5173"
+    "http://3.108.196.134:5173",
+    "http://3.108.196.134:5174",
+
 ]
 
 # ─────────────────────────────────────────
