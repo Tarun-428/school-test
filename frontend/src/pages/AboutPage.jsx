@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageHero from '../components/PageHero'
+import LineIcon from '../components/LineIcon'
+import CountUp from '../components/CountUp'
 
 const leadership = [
   {
@@ -24,12 +27,12 @@ const leadership = [
 ]
 
 const infrastructure = [
-  { icon: '🖥️', title: 'Smart Classrooms', desc: 'Modern digital classrooms equipped with projectors, smart boards, and high-speed internet.' },
-  { icon: '🔬', title: 'Science Labs', desc: 'Fully equipped Physics, Chemistry, and Biology laboratories for hands-on learning.' },
-  { icon: '📖', title: 'Library & Resource Centre', desc: 'Extensive library with thousands of books, previous years papers, and digital resources.' },
-  { icon: '🏃', title: 'Sports Facilities', desc: 'Indoor and outdoor sports facilities for holistic physical development.' },
-  { icon: '🍽️', title: 'Cafeteria', desc: 'Hygienic and nutritious meals served in a comfortable cafeteria environment.' },
-  { icon: '🚌', title: 'Transportation', desc: 'Safe and reliable transport service covering major routes in the city.' },
+  { icon: 'bookOpen', title: 'Smart Classrooms', desc: 'Modern digital classrooms equipped with projectors, smart boards, and high-speed internet.' },
+  { icon: 'atom', title: 'Science Labs', desc: 'Fully equipped Physics, Chemistry, and Biology laboratories for hands-on learning.' },
+  { icon: 'bookOpen', title: 'Library & Resource Centre', desc: 'Extensive library with thousands of books, previous years papers, and digital resources.' },
+  { icon: 'trophy', title: 'Sports Facilities', desc: 'Indoor and outdoor sports facilities for holistic physical development.' },
+  { icon: 'users', title: 'Cafeteria', desc: 'Hygienic and nutritious meals served in a comfortable cafeteria environment.' },
+  { icon: 'refresh', title: 'Transportation', desc: 'Safe and reliable transport service covering major routes in the city.' },
 ]
 
 export default function AboutPage() {
@@ -37,18 +40,11 @@ export default function AboutPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">About Us</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">
-            Shakti Education Trust
-          </h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Established in 1998, Shakti Education Trust has been a beacon of academic excellence in Central India,
-            guiding thousands of students to top engineering and medical colleges.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About Us"
+        title="Shakti Education Trust"
+        description="Established in 1998, Shakti Education Trust has been a beacon of academic excellence in Central India, guiding thousands of students to top engineering and medical colleges."
+      />
 
       {/* Trust Introduction */}
       <section className="py-16">
@@ -71,17 +67,17 @@ export default function AboutPage() {
                 { number: '10,000+', label: 'Alumni' },
                 { number: '98%', label: 'Selection Rate' },
               ].map(s => (
-                <div key={s.label} className="text-center bg-gray-50 rounded-xl p-4">
-                  <p className="font-heading text-2xl font-bold text-primary">{s.number}</p>
+                <div key={s.label} className="text-center bg-gray-50 rounded-lg p-4 hover-lift">
+                  <p className="font-heading text-2xl font-bold text-primary"><CountUp value={s.number} /></p>
                   <p className="text-xs text-gray-600 font-medium">{s.label}</p>
                 </div>
               ))}
             </div>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200"
+            src="https://plus.unsplash.com/premium_photo-1663126319781-f4de55c7ebd4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Students in classroom"
-            className="rounded-2xl shadow-lg w-full h-80 object-cover"
+            className="rounded-lg shadow-lg w-full h-80 object-cover"
           />
         </div>
       </section>
@@ -93,16 +89,20 @@ export default function AboutPage() {
             <h2 className="font-heading text-4xl font-bold text-gray-900 uppercase">Vision & Mission</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-primary text-white rounded-2xl p-8">
-              <div className="text-4xl mb-4">🔭</div>
+            <div className="bg-primary text-white rounded-lg p-8 hover-lift">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white/15">
+                <LineIcon name="trophy" className="h-7 w-7" />
+              </div>
               <h3 className="font-heading text-2xl font-bold uppercase mb-3">Our Vision</h3>
               <p className="text-blue-100 leading-relaxed">
                 To be the most trusted and impactful educational institution in India, producing future leaders,
                 scientists, and doctors who contribute positively to society and the world.
               </p>
             </div>
-            <div className="bg-white border-2 border-primary rounded-2xl p-8">
-              <div className="text-4xl mb-4">🎯</div>
+            <div className="bg-white border-2 border-primary rounded-lg p-8 hover-lift">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light text-primary">
+                <LineIcon name="checkCircle" className="h-7 w-7" />
+              </div>
               <h3 className="font-heading text-2xl font-bold text-gray-900 uppercase mb-3">Our Mission</h3>
               <p className="text-gray-700 leading-relaxed">
                 To provide excellent, affordable, and student-centred coaching that builds not only academic
@@ -124,7 +124,7 @@ export default function AboutPage() {
               { title: 'Creativity', desc: 'We encourage curiosity, innovation, and independent thinking.' },
               { title: 'Responsibility', desc: 'We prepare students to become responsible global citizens.' },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-5">
+              <div key={item.title} className="bg-white rounded-lg border border-gray-200 p-5 hover-lift">
                 <h3 className="font-heading text-xl font-bold uppercase text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
@@ -142,7 +142,7 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {leadership.map(leader => (
-              <div key={leader.name} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+              <div key={leader.name} className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover-lift">
                 <img src={leader.photo} alt={leader.name} className="w-full h-56 object-cover object-top" />
                 <div className="p-5">
                   <h3 className="font-heading text-xl font-bold text-gray-900 mb-0.5">{leader.name}</h3>
@@ -164,8 +164,10 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {infrastructure.map(item => (
-              <div key={item.title} className="flex items-start gap-4 bg-gray-50 rounded-xl p-5 border border-gray-100">
-                <span className="text-3xl mt-0.5">{item.icon}</span>
+              <div key={item.title} className="flex items-start gap-4 bg-gray-50 rounded-lg p-5 border border-gray-100 hover-lift">
+                <span className="mt-0.5 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
+                  <LineIcon name={item.icon} className="h-6 w-6" />
+                </span>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
@@ -181,8 +183,8 @@ export default function AboutPage() {
         <h2 className="font-heading text-4xl font-bold uppercase mb-4">Ready to Join Shakti Education Trust?</h2>
         <p className="text-blue-100 mb-7 text-lg">Book a free counselling session or apply for our scholarship exam today.</p>
         <div className="flex justify-center gap-4 flex-wrap">
-          <Link to="/courses" className="bg-white text-primary font-bold px-7 py-3 rounded-xl hover:bg-gray-100 transition">View Courses</Link>
-          <Link to="/scholarship" className="border-2 border-white text-white font-bold px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">Apply for Scholarship</Link>
+          <Link to="/courses" className="bg-white text-primary font-bold px-7 py-3 rounded-lg hover:bg-gray-100 transition">View Courses</Link>
+          <Link to="/scholarship" className="border-2 border-white text-white font-bold px-7 py-3 rounded-lg hover:bg-white hover:text-primary transition">Apply for Scholarship</Link>
         </div>
       </section>
 
@@ -190,4 +192,3 @@ export default function AboutPage() {
     </div>
   )
 }
-

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { galleryService } from '../services/index'
+import PageHero from '../components/PageHero'
 
 export default function PublicGalleryPage() {
   const [images, setImages] = useState([])
@@ -28,15 +29,11 @@ export default function PublicGalleryPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">School Gallery</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">Memories & Moments</h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Browse all photos uploaded by admin in a Pinterest-style gallery wall.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="School Gallery"
+        title="Memories & Moments"
+        description="Browse all photos uploaded by admin in a Pinterest-style gallery wall."
+      />
 
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
@@ -45,8 +42,7 @@ export default function PublicGalleryPage() {
               <div className="w-9 h-9 border-4 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           ) : images.length === 0 ? (
-            <div className="text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-              <p className="text-5xl mb-4">🖼️</p>
+            <div className="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 motion-panel">
               <p className="text-gray-600 font-medium">No gallery photos available right now.</p>
             </div>
           ) : (
@@ -54,7 +50,7 @@ export default function PublicGalleryPage() {
               {images.map((img) => (
                 <div
                   key={img.id}
-                  className="mb-4 break-inside-avoid cursor-pointer group overflow-hidden rounded-2xl bg-gray-100 shadow-sm"
+                  className="mb-4 break-inside-avoid cursor-pointer group overflow-hidden rounded-lg bg-gray-100 shadow-sm hover-lift"
                   onClick={() => setSelected(img)}
                 >
                   <img
@@ -77,7 +73,7 @@ export default function PublicGalleryPage() {
 
       {selected && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 motion-panel"
           onClick={() => setSelected(null)}
         >
           <button className="absolute top-4 right-4 text-white text-3xl hover:text-gray-300">&times;</button>

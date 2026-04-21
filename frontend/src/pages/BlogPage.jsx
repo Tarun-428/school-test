@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageHero from '../components/PageHero'
+import LineIcon from '../components/LineIcon'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Posts' },
@@ -75,9 +77,9 @@ const POSTS = [
 
 const CATEGORY_COLORS = {
   exam_tips: 'bg-blue-100 text-blue-700',
-  career: 'bg-green-100 text-green-700',
-  news: 'bg-purple-100 text-purple-700',
-  achievement: 'bg-yellow-100 text-yellow-700',
+  career: 'bg-sky-100 text-sky-700',
+  news: 'bg-cyan-100 text-cyan-700',
+  achievement: 'bg-primary-light text-primary-dark',
 }
 
 const CATEGORY_LABELS = {
@@ -100,25 +102,17 @@ export default function BlogPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Blog</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">
-            Exam Tips & Career Guidance
-          </h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Stay ahead with our expert articles on exam preparation, career planning, and
-            the latest news from Shakti Education Trust.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Blog"
+        title="Exam Tips & Career Guidance"
+        description="Stay ahead with our expert articles on exam preparation, career planning, and the latest news from Shakti Education Trust."
+      />
 
       {/* Featured Post */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-5">Featured Article</p>
-          <div className="grid lg:grid-cols-2 gap-8 items-center bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200">
+          <div className="grid lg:grid-cols-2 gap-8 items-center bg-white rounded-lg overflow-hidden shadow-md border border-gray-200 hover-lift">
             <img
               src={featured.image}
               alt={featured.title}
@@ -131,11 +125,14 @@ export default function BlogPage() {
               <h2 className="font-heading text-3xl font-bold text-gray-900 mt-4 mb-3">{featured.title}</h2>
               <p className="text-gray-600 leading-relaxed mb-5">{featured.excerpt}</p>
               <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
-                <span>✍️ {featured.author}</span>
-                <span>📅 {featured.date}</span>
-                <span>⏱ {featured.readTime}</span>
+                <span>{featured.author}</span>
+                <span>{featured.date}</span>
+                <span>{featured.readTime}</span>
               </div>
-              <button className="btn-primary">Read Full Article →</button>
+              <button className="btn-primary inline-flex items-center gap-2">
+                Read Full Article
+                <LineIcon name="arrowRight" className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -152,7 +149,7 @@ export default function BlogPage() {
                 onClick={() => setActiveCategory(c.key)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
                   activeCategory === c.key
-                    ? 'bg-primary text-white'
+                    ? 'bg-primary text-white shadow-md shadow-primary/20'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -164,7 +161,7 @@ export default function BlogPage() {
           {/* Post grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayed.map(post => (
-              <article key={post.id} className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition bg-white">
+              <article key={post.id} className="rounded-lg border border-gray-200 overflow-hidden shadow-sm bg-white hover-lift">
                 <div className="relative">
                   <img src={post.image} alt={post.title} className="w-full h-44 object-cover" />
                   <span className={`absolute top-3 left-3 text-xs font-bold uppercase px-2 py-1 rounded-full ${CATEGORY_COLORS[post.category]}`}>
@@ -185,7 +182,6 @@ export default function BlogPage() {
 
           {displayed.length === 0 && (
             <div className="text-center py-16 text-gray-400">
-              <p className="text-5xl mb-4">📝</p>
               <p className="text-lg font-semibold">No posts in this category yet.</p>
             </div>
           )}
@@ -199,13 +195,16 @@ export default function BlogPage() {
           <p className="text-gray-400 mb-7">
             Subscribe to our newsletter for the latest exam tips, news, and scholarship announcements.
           </p>
-          <div className="flex gap-3 max-w-md mx-auto">
+          <div className="flex flex-col gap-3 max-w-md mx-auto sm:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary"
+              className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary"
             />
-            <button className="btn-primary whitespace-nowrap">Subscribe →</button>
+            <button className="btn-primary whitespace-nowrap inline-flex items-center gap-2">
+              Subscribe
+              <LineIcon name="arrowRight" className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </section>

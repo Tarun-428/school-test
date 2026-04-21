@@ -18,11 +18,13 @@ import Students from './pages/Students'
 import FacultyPage from './pages/FacultyPage'
 import GalleryPage from './pages/GalleryPage'
 import TransactionsPage from './pages/TransactionsPage'
+import PageMotion from './components/PageMotion'
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <PageMotion />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/fee-payment" element={<FeePayment />} />
