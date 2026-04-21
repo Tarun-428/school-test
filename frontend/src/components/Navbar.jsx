@@ -28,10 +28,12 @@ export default function Navbar() {
 
   const links = [
     { to: '/', label: 'Home' },
-    { to: '/fee-payment', label: 'Fee Payment' },
     { to: '/about', label: 'About Us' },
-    { to: '/academics', label: 'Academics' },
+    { to: '/courses', label: 'Courses' },
+    { to: '/scholarship', label: 'Scholarship' },
+    { to: '/faculty', label: 'Faculty' },
     { to: '/gallery', label: 'Gallery' },
+    { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
   ]
 

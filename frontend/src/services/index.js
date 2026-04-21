@@ -28,3 +28,32 @@ export const paymentService = {
   getTransactions: (studentId) =>
     api.get('/payments/transactions/' + (studentId ? `?student_id=${studentId}` : '')),
 }
+
+export const blogService = {
+  getAll: (category) => api.get('/blog/' + (category ? `?category=${category}` : '')),
+  getById: (id) => api.get(`/blog/${id}/`),
+  getBySlug: (slug) => api.get(`/blog/?slug=${slug}`),
+  create: (data) => api.post('/blog/', data),
+  update: (id, data) => api.patch(`/blog/${id}/`, data),
+  remove: (id) => api.delete(`/blog/${id}/`),
+}
+
+export const courseService = {
+  getAll: (category) => api.get('/courses/' + (category ? `?category=${category}` : '')),
+  getById: (id) => api.get(`/courses/${id}/`),
+  create: (data) => api.post('/courses/', data),
+  update: (id, data) => api.patch(`/courses/${id}/`, data),
+  remove: (id) => api.delete(`/courses/${id}/`),
+}
+
+export const enquiryService = {
+  submit: (data) => api.post('/contact/enquiries/', data),
+  getAll: () => api.get('/contact/enquiries/'),
+}
+
+export const appointmentService = {
+  book: (data) => api.post('/contact/appointments/', data),
+  getAll: () => api.get('/contact/appointments/'),
+  updateStatus: (id, status) => api.patch(`/contact/appointments/${id}/`, { status }),
+}
+

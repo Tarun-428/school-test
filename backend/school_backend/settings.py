@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'faculty',
     'payments',
     'gallery',
+    'blog',
+    'courses',
+    'enquiries',
 ]
 
 MIDDLEWARE = [
