@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { studentService, paymentService } from '../services/index'
+import PageHero from '../components/PageHero'
+import LineIcon from '../components/LineIcon'
+import CountUp from '../components/CountUp'
 
 export default function FeePayment() {
   const [studentId, setStudentId] = useState('')
@@ -80,26 +83,24 @@ export default function FeePayment() {
     <div className="font-body min-h-screen bg-gray-50">
       <Navbar />
       <div className="pt-16">
-        {/* Hero bar */}
-        <div className="bg-dark text-white relative overflow-hidden flex flex-col" style={{ minHeight: '52vh' }}>
-          <div className="absolute left-0 top-0 bottom-0 w-2 bg-primary" />
-          <div className="flex-1 flex flex-col items-center justify-center text-center px-8 pt-28 pb-6">
-            <p className="text-primary text-xs tracking-[0.3em] uppercase font-semibold mb-4">Shakti Education trust</p>
-            <h1 className="font-heading text-5xl font-bold uppercase mb-3">FEE PAYMENT PORTAL</h1>
-            <p className="text-gray-400 mb-6">Search your student ID to view and pay fees securely</p>
-            <p className="font-heading text-6xl md:text-7xl font-bold text-primary uppercase leading-none">WORK TOGETHER</p>
-          </div>
-          <div className="flex justify-center pb-10">
-            <a href="#fee-search" className="btn-primary text-base px-10 py-4 uppercase font-bold tracking-widest">PAY FEES NOW</a>
-          </div>
-        </div>
+        <PageHero
+          eyebrow="Shakti Education Trust"
+          title="Fee Payment Portal"
+          description="Search your student ID to view and pay fees securely."
+          compact
+        >
+          <a href="#fee-search" className="btn-primary inline-flex items-center gap-2 text-base px-10 py-4 uppercase font-bold">
+            Pay Fees Now
+            <LineIcon name="arrowRight" className="h-4 w-4" />
+          </a>
+        </PageHero>
 
         <div id="fee-search" className="max-w-2xl mx-auto px-4 py-12">
           {/* Search card */}
-          <div className="card p-8 mb-6">
+          <div className="card p-8 mb-6 hover-lift">
             <h2 className="font-heading text-2xl font-bold text-gray-900 mb-1 uppercase">Find Student</h2>
             <p className="text-gray-500 text-sm mb-6">Enter the unique Student ID provided at admission</p>
-            <form onSubmit={handleSearch} className="flex gap-3">
+            <form onSubmit={handleSearch} className="flex flex-col gap-3 sm:flex-row">
               <input
                 value={studentId}
                 onChange={e => setStudentId(e.target.value)}
@@ -114,28 +115,28 @@ export default function FeePayment() {
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     Searching...
                   </span>
-                ) : 'Search →'}
+                ) : 'Search'}
               </button>
             </form>
           </div>
 
           {/* Error */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 mb-4 text-sm">
-              ⚠️ {error}
+            <div className="motion-panel bg-red-50 border border-red-200 text-red-700 rounded-lg px-5 py-4 mb-4 text-sm">
+              {error}
             </div>
           )}
 
           {/* Success */}
           {message && (
-            <div className="bg-green-50 border border-green-200 text-green-700 rounded-xl px-5 py-4 mb-4 text-sm">
-              ✅ {message}
+            <div className="motion-panel bg-primary-light border border-primary/20 text-primary-dark rounded-lg px-5 py-4 mb-4 text-sm">
+              {message}
             </div>
           )}
 
           {/* Student info & payment */}
           {student && (
-            <div className="card p-8">
+            <div className="motion-panel card p-8 hover-lift">
               {/* Student profile */}
               <div className="flex items-center gap-5 mb-8 pb-8 border-b border-gray-100">
                 {student.profile_photo_url ? (
@@ -159,9 +160,9 @@ export default function FeePayment() {
                   { label: 'Amount Paid', value: student.paid_fee, bg: 'bg-green-50', text: 'text-green-700' },
                   { label: 'Remaining', value: student.remaining_fee, bg: 'bg-red-50', text: 'text-red-600' },
                 ].map(f => (
-                  <div key={f.label} className={`${f.bg} rounded-xl p-4 text-center`}>
+                  <div key={f.label} className={`${f.bg} rounded-lg p-4 text-center`}>
                     <p className="text-xs text-gray-500 font-medium mb-1">{f.label}</p>
-                    <p className={`font-heading text-2xl font-bold ${f.text}`}>₹{Number(f.value).toLocaleString('en-IN')}</p>
+                    <p className={`font-heading text-2xl font-bold ${f.text}`}><CountUp value={`₹${Number(f.value).toLocaleString('en-IN')}`} /></p>
                   </div>
                 ))}
               </div>
@@ -217,11 +218,13 @@ export default function FeePayment() {
                       </span>
                     ) : `Pay ₹${amount ? Number(amount).toLocaleString('en-IN') : 0} via Razorpay`}
                   </button>
-                  <p className="text-center text-xs text-gray-400 mt-3">🔒 Secured by Razorpay. We never store your card details.</p>
+                  <p className="text-center text-xs text-gray-400 mt-3">Secured by Razorpay. We never store your card details.</p>
                 </div>
               ) : (
-                <div className="text-center py-6 bg-green-50 rounded-xl border border-green-200">
-                  <p className="text-4xl mb-2">🎉</p>
+                <div className="motion-panel text-center py-6 bg-primary-light rounded-lg border border-primary/20">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <LineIcon name="checkCircle" className="h-7 w-7" />
+                  </div>
                   <p className="font-heading text-xl font-bold text-green-700">ALL FEES PAID!</p>
                   <p className="text-green-600 text-sm mt-1">No outstanding balance for this student.</p>
                 </div>

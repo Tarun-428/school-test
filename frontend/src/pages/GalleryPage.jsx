@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import AdminLayout from '../components/AdminLayout'
 import Modal from '../components/Modal'
 import { galleryService } from '../services/index'
+import LineIcon from '../components/LineIcon'
 
 export default function GalleryPage() {
   const [images, setImages] = useState([])
@@ -63,7 +64,8 @@ export default function GalleryPage() {
         <p className="text-gray-500 text-sm">{images.length} image{images.length !== 1 ? 's' : ''} in gallery</p>
         <button onClick={() => { setUploadModal(true); setFiles([]); setPreviews([]) }}
           className="btn-primary flex items-center gap-2">
-          📤 Upload Images
+          <LineIcon name="upload" className="h-4 w-4" />
+          Upload Images
         </button>
       </div>
 
@@ -73,8 +75,10 @@ export default function GalleryPage() {
           <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       ) : images.length === 0 ? (
-        <div className="text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-          <p className="text-5xl mb-4">🖼️</p>
+        <div className="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 motion-panel">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-primary-light text-primary">
+            <LineIcon name="image" className="h-8 w-8" />
+          </div>
           <p className="text-gray-500 font-medium">No images yet</p>
           <p className="text-gray-400 text-sm mt-1">Click "Upload Images" to add photos to the gallery</p>
         </div>
@@ -129,7 +133,7 @@ export default function GalleryPage() {
           {previews.length > 0 && (
             <div>
               <p className="text-xs text-gray-500 mb-2">{files.length} file{files.length !== 1 ? 's' : ''} selected</p>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {previews.map((p, i) => (
                   <img key={i} src={p} alt="" className="w-full aspect-square object-cover rounded-lg" />
                 ))}
@@ -150,7 +154,7 @@ export default function GalleryPage() {
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <button type="button" onClick={() => setUploadModal(false)}
               className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium hover:bg-gray-50 transition">
               Cancel
@@ -180,7 +184,7 @@ export default function GalleryPage() {
       {/* Delete confirm */}
       <Modal isOpen={!!delConfirm} onClose={() => setDelConfirm(null)} title="Delete Image">
         <p className="text-gray-600 mb-6">Remove this image from the gallery? This cannot be undone.</p>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <button onClick={() => setDelConfirm(null)}
             className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium hover:bg-gray-50 transition">
             Cancel

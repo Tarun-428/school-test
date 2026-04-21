@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageHero from '../components/PageHero'
 
 const topFaculty = [
   {
@@ -41,21 +42,17 @@ export default function PublicFacultyPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Faculty</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">Top Faculty</h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Meet our top educators who lead with academic excellence, mentorship, and student-first learning.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Faculty"
+        title="Top Faculty"
+        description="Meet our top educators who lead with academic excellence, mentorship, and student-first learning."
+      />
 
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {topFaculty.map((member) => (
-              <article key={member.name} className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm bg-white">
+              <article key={member.name} className="rounded-lg border border-gray-200 overflow-hidden shadow-sm bg-white hover-lift">
                 <img src={member.photo} alt={member.name} className="w-full h-56 object-cover" />
                 <div className="p-5">
                   <h2 className="font-heading text-2xl font-bold uppercase text-gray-900">{member.name}</h2>

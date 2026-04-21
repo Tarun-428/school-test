@@ -20,7 +20,7 @@
     @apply border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-all duration-200;
   }
   .card {
-    @apply bg-white rounded-2xl shadow-lg overflow-hidden;
+    @apply bg-white rounded-lg shadow-lg overflow-hidden;
   }
   .input {
     @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition;
@@ -40,3 +40,114 @@
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { @apply bg-gray-100; }
 ::-webkit-scrollbar-thumb { @apply bg-gray-400 rounded-full; }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 700ms ease both;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 620ms ease,
+    transform 620ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease,
+    background-color 240ms ease;
+}
+
+.motion-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-panel {
+  animation: panel-open 280ms ease both;
+  transform-origin: top center;
+}
+
+.hover-lift {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 45px rgba(3, 26, 45, 0.12);
+}
+
+.btn-primary:not(:disabled):hover,
+.btn-outline:not(:disabled):hover,
+button:not(:disabled):hover,
+a[class*="btn-"]:hover,
+a[href][class*="rounded"]:hover,
+a[href][class*="bg-"]:hover,
+.arc-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(10, 132, 216, 0.18);
+}
+
+.btn-primary,
+.btn-outline,
+button,
+a[class*="btn-"],
+a[href][class*="rounded"],
+a[href][class*="bg-"],
+.arc-cta {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+@keyframes panel-open {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .motion-panel {
+    animation: none;
+  }
+
+  .motion-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

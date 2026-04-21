@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import AdminLayout from '../components/AdminLayout'
 import Modal from '../components/Modal'
 import { facultyService } from '../services/index'
+import LineIcon from '../components/LineIcon'
 
 const EMPTY = { name: '', subject: '', designation: 'Teacher', email: '', phone: '', bio: '', photo: null }
 
@@ -70,9 +71,10 @@ export default function FacultyPage() {
     <AdminLayout title="Faculty">
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input value={search} onChange={e => setSearch(e.target.value)}
-          placeholder="Search by name or subject..." className="input flex-1 max-w-md" />
+          placeholder="Search by name or subject..." className="input flex-1 sm:max-w-md" />
         <button onClick={openAdd} className="btn-primary flex items-center gap-2 whitespace-nowrap">
-          ➕ Add Faculty
+          <LineIcon name="plus" className="h-4 w-4" />
+          Add Faculty
         </button>
       </div>
 
@@ -112,7 +114,7 @@ export default function FacultyPage() {
                 <h3 className="font-heading font-bold text-gray-900 uppercase truncate">{f.name}</h3>
                 <p className="text-primary text-sm font-medium">{f.subject}</p>
                 <p className="text-gray-500 text-xs mt-0.5">{f.designation}</p>
-                {f.phone && <p className="text-gray-400 text-xs mt-2">📞 {f.phone}</p>}
+                {f.phone && <p className="flex items-center gap-1.5 text-gray-400 text-xs mt-2"><LineIcon name="phone" className="h-3.5 w-3.5" /> {f.phone}</p>}
               </div>
             </div>
           ))}
@@ -130,7 +132,7 @@ export default function FacultyPage() {
             <input name="name" value={form.name} onChange={handleChange} required className={fc} placeholder="Dr. Jane Smith" />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Subject *</label>
               <input name="subject" value={form.subject} onChange={handleChange} required className={fc} placeholder="Mathematics" />
@@ -145,7 +147,7 @@ export default function FacultyPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Phone *</label>
               <input name="phone" value={form.phone} onChange={handleChange} required className={fc} placeholder="+91 9999999999" />
@@ -168,7 +170,7 @@ export default function FacultyPage() {
               className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
           </div>
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <button type="button" onClick={() => setModalOpen(false)}
               className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium hover:bg-gray-50 transition">
               Cancel
@@ -185,7 +187,7 @@ export default function FacultyPage() {
         <p className="text-gray-600 mb-6">
           Delete <strong>{delConfirm?.name}</strong> from faculty? This cannot be undone.
         </p>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <button onClick={() => setDelConfirm(null)}
             className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium hover:bg-gray-50 transition">
             Cancel

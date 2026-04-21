@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageHero from '../components/PageHero'
 
 const programs = [
   {
@@ -25,15 +26,11 @@ export default function AcademicsPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Academics</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">Learning Pathways</h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Our curriculum blends international standards with student-centered teaching and bilingual fluency.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Academics"
+        title="Learning Pathways"
+        description="Our curriculum blends international standards with student-centered teaching and bilingual fluency."
+      />
 
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
@@ -42,7 +39,7 @@ export default function AcademicsPage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {programs.map((program) => (
-              <div key={program.grade} className="rounded-2xl border border-gray-200 p-6 bg-white shadow-sm">
+              <div key={program.grade} className="rounded-lg border border-gray-200 p-6 bg-white shadow-sm hover-lift">
                 <h3 className="font-heading text-2xl font-bold text-gray-900 uppercase mb-3">{program.grade}</h3>
                 <p className="text-gray-600 leading-relaxed">{program.details}</p>
               </div>
@@ -58,7 +55,7 @@ export default function AcademicsPage() {
             { title: 'STEM Focus', desc: 'Hands-on lab work, coding exposure, and scientific exploration.' },
             { title: 'Arts & Sports', desc: 'Creative and physical development through clubs and activities.' },
           ].map((item) => (
-            <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-5">
+            <div key={item.title} className="bg-white rounded-lg border border-gray-200 p-5 hover-lift">
               <h3 className="font-heading text-xl font-bold uppercase text-gray-900 mb-2">{item.title}</h3>
               <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
             </div>

@@ -12,12 +12,22 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ─────────────────────────────────────────
 # Security
+# ─────────────────────────────────────────
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
-# Application definition
+# IMPORTANT: keep True in local
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1'
+).split(',')
+
+# ─────────────────────────────────────────
+# Installed Apps
+# ─────────────────────────────────────────
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,12 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # Third-party
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders',
     'cloudinary',
     'cloudinary_storage',
+
     # Local apps
     'students',
     'faculty',
@@ -41,8 +53,11 @@ INSTALLED_APPS = [
     'enquiries',
 ]
 
+# ─────────────────────────────────────────
+# Middleware
+# ─────────────────────────────────────────
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Must be first
+    'corsheaders.middleware.CorsMiddleware',  # MUST be first
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -73,7 +88,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'school_backend.wsgi.application'
 
-# Database - PostgreSQL
+# ─────────────────────────────────────────
+# Database (PostgreSQL)
+# ─────────────────────────────────────────
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -85,7 +102,9 @@ DATABASES = {
     }
 }
 
+# ─────────────────────────────────────────
 # Password validation
+# ─────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -93,12 +112,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# ─────────────────────────────────────────
+# Internationalization
+# ─────────────────────────────────────────
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
+# ─────────────────────────────────────────
 # Static files
+# ─────────────────────────────────────────
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -106,7 +130,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ─────────────────────────────────────────
-# Cloudinary configuration
+# Cloudinary
 # ─────────────────────────────────────────
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
@@ -117,13 +141,13 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 
 # ─────────────────────────────────────────
-# Razorpay configuration
+# Razorpay
 # ─────────────────────────────────────────
 RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID')
 RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
 
 # ─────────────────────────────────────────
-# JWT Authentication
+# Django REST Framework + JWT
 # ─────────────────────────────────────────
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -141,11 +165,52 @@ SIMPLE_JWT = {
 }
 
 # ─────────────────────────────────────────
-# CORS – allow frontend origin
+# CORS CONFIG (FIXED)
 # ─────────────────────────────────────────
+
+# Temporary (debug) → remove later
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Proper origins
 CORS_ALLOWED_ORIGINS = os.environ.get(
     'CORS_ALLOWED_ORIGINS',
-    'http://localhost:5173,http://localhost:3000'
+    'http://localhost:5173,http://localhost:3000,http://localhost:5174'
 ).split(',')
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Required for preflight requests
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+# ─────────────────────────────────────────
+# CSRF (IMPORTANT FOR POST LOGIN)
+# ─────────────────────────────────────────
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+]
+
+# ─────────────────────────────────────────
+# DEBUG PRINT (remove later)
+# ─────────────────────────────────────────
+print("DEBUG:", DEBUG)
+print("CORS_ALLOWED_ORIGINS:", CORS_ALLOWED_ORIGINS)

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import AdminLayout from '../components/AdminLayout'
 import Modal from '../components/Modal'
 import { studentService } from '../services/index'
+import LineIcon from '../components/LineIcon'
 
 const EMPTY = {
   student_id: '', name: '', student_class: '', section: 'A',
@@ -94,10 +95,11 @@ export default function Students() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search by name, ID or class..."
-          className="input flex-1 max-w-md"
+          className="input flex-1 sm:max-w-md"
         />
         <button onClick={openAdd} className="btn-primary flex items-center gap-2 whitespace-nowrap">
-          ➕ Add Student
+          <LineIcon name="plus" className="h-4 w-4" />
+          Add Student
         </button>
       </div>
 
@@ -179,7 +181,7 @@ export default function Students() {
         <form onSubmit={handleSave} className="space-y-4">
           {error && <div className="bg-red-50 text-red-700 border border-red-200 rounded-lg px-4 py-2.5 text-sm">{error}</div>}
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Student ID *</label>
               <input name="student_id" value={form.student_id} onChange={handleChange}
@@ -192,7 +194,7 @@ export default function Students() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Class *</label>
               <input name="student_class" value={form.student_class} onChange={handleChange}
@@ -206,7 +208,7 @@ export default function Students() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Phone *</label>
               <input name="phone" value={form.phone} onChange={handleChange}
@@ -231,7 +233,7 @@ export default function Students() {
               rows={2} className={fieldClass + ' resize-none'} placeholder="Home address" />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="label">Total Fee (₹) *</label>
               <input name="total_fee" type="number" value={form.total_fee} onChange={handleChange}
@@ -251,7 +253,7 @@ export default function Students() {
               className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
           </div>
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <button type="button" onClick={() => setModalOpen(false)}
               className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
               Cancel
@@ -269,7 +271,7 @@ export default function Students() {
           Are you sure you want to delete <strong>{delConfirm?.name}</strong> ({delConfirm?.student_id})?
           This action cannot be undone.
         </p>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <button onClick={() => setDelConfirm(null)}
             className="flex-1 py-2.5 border border-gray-300 rounded-xl text-sm font-medium hover:bg-gray-50 transition">
             Cancel

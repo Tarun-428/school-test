@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Observer } from 'gsap/Observer'
 import { galleryService } from '../../services/index'
+import GravityStarsBackground from '../GravityStarsBackground'
 import './ArcGallery.css'
-
-gsap.registerPlugin(ScrollTrigger, Observer)
 
 const ARC_RADIUS = 430
 const SPREAD_ANGLE = 180
@@ -16,7 +13,9 @@ export default function ArcGallery() {
   const sectionRef = useRef(null)
   const cardsRef = useRef([])
   const progressRef = useRef(0)
+  const targetProgressRef = useRef(0)
   const rafRef = useRef(null)
+  const radiusRef = useRef(ARC_RADIUS)
   const [loaded, setLoaded] = useState(false)
   const [galleryImages, setGalleryImages] = useState([])
 
@@ -48,10 +47,11 @@ export default function ArcGallery() {
     const angleDeg = START_ANGLE - (normalizedIndex / Math.max(total - 1, 1)) * SPREAD_ANGLE
     const angleRad = (angleDeg * Math.PI) / 180
 
+    const radius = radiusRef.current
     const cx = 0
-    const cy = ARC_RADIUS * 0.35
-    const x = cx + ARC_RADIUS * Math.cos(angleRad)
-    const y = cy - ARC_RADIUS * Math.sin(angleRad)
+    const cy = radius * 0.35
+    const x = cx + radius * Math.cos(angleRad)
+    const y = cy - radius * Math.sin(angleRad)
     const tilt = -(angleDeg - 90)
 
     const normalizedPos = normalizedIndex / Math.max(total - 1, 1)
@@ -83,26 +83,10 @@ export default function ArcGallery() {
     })
   }
 
-  const smoothDrive = (target) => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current)
-
-    const animate = () => {
-      const diff = target - progressRef.current
-      if (Math.abs(diff) < 0.0005) {
-        progressRef.current = target
-        applyProgress(target)
-        return
-      }
-      progressRef.current += diff * 0.08
-      applyProgress(progressRef.current)
-      rafRef.current = requestAnimationFrame(animate)
-    }
-    rafRef.current = requestAnimationFrame(animate)
-  }
-
   useEffect(() => {
     cardsRef.current = cardsRef.current.slice(0, images.length)
     progressRef.current = 0
+    targetProgressRef.current = 0
     applyProgress(0)
     if (images.length) setLoaded(true)
 
@@ -110,22 +94,27 @@ export default function ArcGallery() {
       return undefined
     }
 
-    const st = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      end: '+=200%',
-      pin: true,
-      scrub: false,
-      onUpdate: (self) => {
-        smoothDrive(self.progress)
-      },
-    })
-
     let swipeStart = null
     const el = sectionRef.current
+    const setTarget = (next) => {
+      targetProgressRef.current = next
+    }
+
+    const updateRadius = () => {
+      radiusRef.current = Math.max(260, Math.min(ARC_RADIUS, window.innerWidth * 0.46))
+      applyProgress(progressRef.current)
+    }
+
+    const animate = () => {
+      const diff = targetProgressRef.current - progressRef.current
+      progressRef.current += diff * 0.075
+      applyProgress(progressRef.current)
+      rafRef.current = requestAnimationFrame(animate)
+    }
 
     const onPointerDown = (e) => {
       swipeStart = e.clientX ?? e.touches?.[0]?.clientX ?? null
+      el.classList.add('arc-section--dragging')
     }
 
     const onPointerMove = (e) => {
@@ -133,40 +122,62 @@ export default function ArcGallery() {
       const currentX = e.clientX ?? e.touches?.[0]?.clientX
       if (currentX == null) return
       const delta = (swipeStart - currentX) / window.innerWidth
-      const target = Math.min(1, Math.max(0, progressRef.current + delta * 1.5))
-      smoothDrive(target)
+      setTarget(targetProgressRef.current + delta * 2.4)
       swipeStart = currentX
     }
 
     const onPointerUp = () => {
       swipeStart = null
+      el.classList.remove('arc-section--dragging')
     }
 
+    const onWheel = (e) => {
+      const rect = el.getBoundingClientRect()
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+      if (!isVisible) return
+      setTarget(targetProgressRef.current + e.deltaY * 0.0009)
+    }
+
+    updateRadius()
+    animate()
     el.addEventListener('pointerdown', onPointerDown)
     el.addEventListener('pointermove', onPointerMove)
     el.addEventListener('pointerup', onPointerUp)
+    el.addEventListener('pointerleave', onPointerUp)
+    el.addEventListener('wheel', onWheel, { passive: true })
     el.addEventListener('touchstart', onPointerDown, { passive: true })
     el.addEventListener('touchmove', onPointerMove, { passive: true })
     el.addEventListener('touchend', onPointerUp)
+    window.addEventListener('resize', updateRadius)
 
     return () => {
-      st.kill()
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       el.removeEventListener('pointerdown', onPointerDown)
       el.removeEventListener('pointermove', onPointerMove)
       el.removeEventListener('pointerup', onPointerUp)
+      el.removeEventListener('pointerleave', onPointerUp)
+      el.removeEventListener('wheel', onWheel)
       el.removeEventListener('touchstart', onPointerDown)
       el.removeEventListener('touchmove', onPointerMove)
       el.removeEventListener('touchend', onPointerUp)
+      window.removeEventListener('resize', updateRadius)
     }
   }, [images.length])
 
   return (
     <section ref={sectionRef} className="arc-section">
-      <span className="deco deco-heart deco-1">♥</span>
-      <span className="deco deco-heart deco-2">♥</span>
-      <span className="deco deco-star deco-3">✦</span>
-      <span className="deco deco-star deco-4">✦</span>
+      <GravityStarsBackground
+        starsCount={90}
+        starsSize={1.8}
+        starsOpacity={0.68}
+        glowIntensity={16}
+        movementSpeed={0.18}
+        mouseInfluence={130}
+        gravityStrength={70}
+        starsInteraction
+        className="arc-stars"
+      />
+      <div className="arc-bg-overlay" />
 
       <div className={`arc-track ${loaded ? 'arc-track--loaded' : ''}`}>
         {images.map((img, i) => (

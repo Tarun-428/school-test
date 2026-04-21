@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { enquiryService } from '../services'
+import PageHero from '../components/PageHero'
+import LineIcon from '../components/LineIcon'
+import CountUp from '../components/CountUp'
 
 const SYLLABUS = {
   'Class 8–9': ['Number Systems', 'Algebra', 'Geometry', 'Science Basics', 'General Aptitude'],
@@ -18,10 +21,10 @@ const DATES = [
 ]
 
 const SCHOLARSHIPS = [
-  { rank: '1st Rank', discount: '100%', label: 'Full Scholarship', color: 'bg-yellow-400 text-yellow-900' },
-  { rank: '2nd Rank', discount: '75%', label: 'Merit Scholarship', color: 'bg-gray-300 text-gray-900' },
-  { rank: '3rd Rank', discount: '50%', label: 'Excellence Award', color: 'bg-amber-600 text-white' },
-  { rank: 'Top 10%', discount: '25%', label: 'Merit Award', color: 'bg-primary text-white' },
+  { rank: '1st Rank', discount: '100%', label: 'Full Scholarship', color: 'bg-primary text-white' },
+  { rank: '2nd Rank', discount: '75%', label: 'Merit Scholarship', color: 'bg-blue-700 text-white' },
+  { rank: '3rd Rank', discount: '50%', label: 'Excellence Award', color: 'bg-sky-600 text-white' },
+  { rank: 'Top 10%', discount: '25%', label: 'Merit Award', color: 'bg-primary-light text-primary-dark' },
 ]
 
 export default function ScholarshipPage() {
@@ -56,19 +59,11 @@ export default function ScholarshipPage() {
     <div className="font-body bg-white min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-28 pb-16 bg-dark text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3">Scholarship Exam</p>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase mb-4">
-            Shakti Education Trust<br />Scholarship Exam
-          </h1>
-          <p className="text-gray-300 max-w-3xl leading-relaxed">
-            Earn up to <span className="text-primary font-bold">100% scholarship</span> on your course fees.
-            Register for SETSE and unlock a world-class education at little to no cost.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Scholarship Exam"
+        title={<>Shakti Education Trust<br />Scholarship Exam</>}
+        description="Earn up to 100% scholarship on your course fees. Register for SETSE and unlock a world-class education at little to no cost."
+      />
 
       {/* Overview + Key Dates */}
       <section className="py-14 bg-gray-50">
@@ -86,8 +81,8 @@ export default function ScholarshipPage() {
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4">
               {SCHOLARSHIPS.map(s => (
-                <div key={s.rank} className={`${s.color} rounded-2xl p-4 text-center`}>
-                  <p className="text-2xl font-bold">{s.discount}</p>
+                <div key={s.rank} className={`${s.color} rounded-lg p-4 text-center hover-lift`}>
+                  <p className="text-2xl font-bold"><CountUp value={s.discount} /></p>
                   <p className="font-semibold text-sm">{s.label}</p>
                   <p className="text-xs opacity-75 mt-1">{s.rank}</p>
                 </div>
@@ -100,15 +95,15 @@ export default function ScholarshipPage() {
             <h2 className="font-heading text-3xl font-bold text-gray-900 uppercase mb-5">Key Dates</h2>
             <div className="space-y-3 mb-6">
               {DATES.map(d => (
-                <div key={d.label} className="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-200">
+                <div key={d.label} className="flex items-center gap-4 bg-white rounded-lg p-4 border border-gray-200 hover-lift">
                   <span className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
                   <span className="text-sm font-semibold text-gray-800 flex-1">{d.label}</span>
                   <span className="text-sm text-gray-600">{d.date}</span>
                 </div>
               ))}
             </div>
-            <div className="bg-primary/10 border border-primary/30 rounded-2xl p-5">
-              <p className="text-primary font-semibold text-sm mb-1">📌 Free Demo Class Available</p>
+            <div className="bg-primary/10 border border-primary/30 rounded-lg p-5 motion-panel">
+              <p className="text-primary font-semibold text-sm mb-1">Free Demo Class Available</p>
               <p className="text-gray-700 text-sm">
                 Students can attend a free demo class before the exam to evaluate teaching quality.
                 Contact us to schedule.
@@ -125,7 +120,7 @@ export default function ScholarshipPage() {
           <p className="text-gray-500 text-center mb-10">The exam is open to all students in Classes 8–12.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {Object.entries(SYLLABUS).map(([cls, topics]) => (
-              <div key={cls} className="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm">
+              <div key={cls} className="border border-gray-200 rounded-lg p-6 bg-white shadow-sm hover-lift">
                 <h3 className="font-heading text-xl font-bold text-gray-900 uppercase mb-4">{cls}</h3>
                 <ul className="space-y-2">
                   {topics.map(t => (
@@ -150,16 +145,18 @@ export default function ScholarshipPage() {
           </div>
 
           {status === 'success' ? (
-            <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-              <div className="text-5xl mb-4">🎉</div>
+            <div className="motion-panel bg-primary-light border border-primary/20 rounded-lg p-8 text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                <LineIcon name="checkCircle" className="h-8 w-8" />
+              </div>
               <h3 className="font-heading text-2xl font-bold text-green-800 mb-2">Registration Submitted!</h3>
               <p className="text-green-700 mb-6">Our counsellor will call you within 24 hours to confirm your exam slot.</p>
               <button onClick={() => setStatus('')} className="btn-primary">Register Another Student</button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
+            <form onSubmit={handleSubmit} className="motion-panel bg-white rounded-lg border border-gray-200 shadow-sm p-8 space-y-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
                   <input
                     name="name" value={form.name} onChange={handleChange} required
@@ -180,7 +177,7 @@ export default function ScholarshipPage() {
                     className="input w-full" placeholder="email@example.com"
                   />
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Current Class *</label>
                   <select name="student_class" value={form.student_class} onChange={handleChange} required className="input w-full">
                     <option value="">Select Class</option>
@@ -189,7 +186,7 @@ export default function ScholarshipPage() {
                     ))}
                   </select>
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Message / Additional Info</label>
                   <textarea
                     name="message" value={form.message} onChange={handleChange}
@@ -202,8 +199,9 @@ export default function ScholarshipPage() {
                 <p className="text-red-600 text-sm">Something went wrong. Please try again or call us directly.</p>
               )}
 
-              <button type="submit" disabled={status === 'loading'} className="btn-primary w-full text-base py-3">
-                {status === 'loading' ? 'Submitting…' : 'Register for SETSE →'}
+              <button type="submit" disabled={status === 'loading'} className="btn-primary w-full text-base py-3 inline-flex items-center justify-center gap-2">
+                {status === 'loading' ? 'Submitting…' : 'Register for SETSE'}
+                {status !== 'loading' && <LineIcon name="arrowRight" className="h-4 w-4" />}
               </button>
 
               <p className="text-xs text-gray-500 text-center">

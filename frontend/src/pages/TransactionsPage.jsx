@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import AdminLayout from '../components/AdminLayout'
 import { paymentService } from '../services/index'
+import LineIcon from '../components/LineIcon'
+import CountUp from '../components/CountUp'
 
 const STATUS_STYLES = {
   success: 'bg-green-100 text-green-700',
@@ -46,15 +48,17 @@ export default function TransactionsPage() {
       {/* Summary cards */}
       <div className="grid sm:grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Total Collected', value: `₹${total.toLocaleString('en-IN')}`, color: 'border-green-500', icon: '💰' },
-          { label: 'Successful Payments', value: successCount, color: 'border-blue-500', icon: '✅' },
-          { label: 'Pending', value: pendingCount, color: 'border-yellow-500', icon: '⏳' },
+          { label: 'Total Collected', value: `₹${total.toLocaleString('en-IN')}`, color: 'border-primary', icon: 'chart' },
+          { label: 'Successful Payments', value: successCount, color: 'border-blue-500', icon: 'checkCircle' },
+          { label: 'Pending', value: pendingCount, color: 'border-sky-500', icon: 'clock' },
         ].map(s => (
-          <div key={s.label} className={`bg-white rounded-2xl p-5 shadow-sm border-l-4 ${s.color} flex items-center gap-4`}>
-            <span className="text-3xl">{s.icon}</span>
+          <div key={s.label} className={`bg-white rounded-lg p-5 shadow-sm border-l-4 ${s.color} flex items-center gap-4 hover-lift`}>
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary-light text-primary">
+              <LineIcon name={s.icon} className="h-6 w-6" />
+            </span>
             <div>
               <p className="text-xs text-gray-500 font-medium">{s.label}</p>
-              <p className="font-heading text-2xl font-bold text-gray-900">{s.value}</p>
+              <p className="font-heading text-2xl font-bold text-gray-900"><CountUp value={s.value} /></p>
             </div>
           </div>
         ))}
@@ -62,7 +66,7 @@ export default function TransactionsPage() {
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
-        <form onSubmit={handleSearch} className="flex gap-2 flex-1 max-w-md">
+        <form onSubmit={handleSearch} className="flex flex-col gap-2 sm:flex-row sm:flex-1 sm:max-w-md">
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -77,7 +81,7 @@ export default function TransactionsPage() {
             </button>
           )}
         </form>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {['all', 'success', 'pending', 'failed'].map(s => (
             <button key={s} onClick={() => setFilterStatus(s)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition capitalize ${

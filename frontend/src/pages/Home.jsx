@@ -4,20 +4,23 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ArcGallery from '../components/ArcGallery/ArcGallery'
 import WhatsAppButton from '../components/WhatsAppButton'
+import GravityStarsBackground from '../components/GravityStarsBackground'
+import LineIcon from '../components/LineIcon'
+import CountUp from '../components/CountUp'
 import { enquiryService } from '../services'
 
 const features = [
-  { icon: '⚙️', title: 'IIT-JEE Preparation', desc: 'Comprehensive Physics, Chemistry & Maths coaching for IIT-JEE Main & Advanced.' },
-  { icon: '🏥', title: 'NEET UG Coaching', desc: 'NCERT-focused Biology, Physics & Chemistry programme for NEET aspirants.' },
-  { icon: '📚', title: 'Foundation Course', desc: 'Build analytical skills and competitive edge from Class 8 onwards.' },
-  { icon: '🏆', title: 'Scholarship Exam', desc: 'Earn up to 100% scholarship on course fees through our SETSE exam.' },
+  { icon: 'atom', title: 'IIT-JEE Preparation', desc: 'Comprehensive Physics, Chemistry & Maths coaching for IIT-JEE Main & Advanced.' },
+  { icon: 'heartPulse', title: 'NEET UG Coaching', desc: 'NCERT-focused Biology, Physics & Chemistry programme for NEET aspirants.' },
+  { icon: 'bookOpen', title: 'Foundation Course', desc: 'Build analytical skills and competitive edge from Class 8 onwards.' },
+  { icon: 'trophy', title: 'Scholarship Exam', desc: 'Earn up to 100% scholarship on course fees through our SETSE exam.' },
 ]
 
 const courseHighlights = [
-  { icon: '⚙️', title: 'IIT-JEE', badge: '2-Year & 1-Year', color: 'bg-blue-600', link: '/courses' },
-  { icon: '🏥', title: 'NEET UG', badge: '2-Year & 1-Year', color: 'bg-green-600', link: '/courses' },
-  { icon: '📚', title: 'Foundation', badge: 'Class 8–10', color: 'bg-purple-600', link: '/courses' },
-  { icon: '🏆', title: 'Scholarship Prep', badge: '3 Months', color: 'bg-yellow-500', link: '/scholarship' },
+  { icon: 'atom', title: 'IIT-JEE', badge: '2-Year & 1-Year', color: 'from-primary to-blue-700', link: '/courses' },
+  { icon: 'heartPulse', title: 'NEET UG', badge: '2-Year & 1-Year', color: 'from-sky-500 to-primary', link: '/courses' },
+  { icon: 'bookOpen', title: 'Foundation', badge: 'Class 8-10', color: 'from-cyan-500 to-blue-600', link: '/courses' },
+  { icon: 'trophy', title: 'Scholarship Prep', badge: '3 Months', color: 'from-blue-700 to-dark-card', link: '/scholarship' },
 ]
 
 const results = [
@@ -39,6 +42,13 @@ const calendarEvents = [
   { date: 'Sep 5', label: 'First Day of School — Gr K–2', color: 'bg-cyan-500' },
   { date: 'Sep 10', label: 'KG Extended Day Program Begins', color: 'bg-blue-500' },
   { date: 'Sep 20', label: 'Parent Open House', color: 'bg-indigo-500' },
+]
+
+const quickLinks = [
+  { icon: 'clipboard', title: 'Registration Enquiry', desc: 'New students may click the link below to submit an inquiry form for admission.' },
+  { icon: 'creditCard', title: 'Fee Payment', desc: 'Parents can click the link below and pay fee online. Online payment is safe and secure.' },
+  { icon: 'users', title: 'Parent Portal', desc: 'Parents of current Shakti Education trust students can access the parent portal.' },
+  { icon: 'refresh', title: 'Online Re-Registration', desc: 'Parents of current Shakti Education trust students may re-register online for the next academic year.' },
 ]
 
 export default function Home() {
@@ -67,28 +77,34 @@ export default function Home() {
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center bg-dark overflow-hidden pt-16">
-        {/* Background image overlay */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600')] bg-cover bg-center opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+        <GravityStarsBackground
+          starsCount={95}
+          starsSize={2}
+          glowIntensity={18}
+          movementSpeed={0.22}
+          mouseInfluence={140}
+          gravityStrength={80}
+          starsInteraction
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_35%,rgba(10,132,216,0.28),transparent_30%),linear-gradient(90deg,rgba(3,26,45,0.98),rgba(3,26,45,0.82)_48%,rgba(3,26,45,0.45))]" />
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary" />
 
-        {/* Red accent bar */}
-        <div className="absolute left-0 top-0 bottom-0 w-2 bg-primary" />
-
-        <div className="relative max-w-7xl mx-auto px-8 py-20">
-          <p className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 py-20">
+          <p className="animate-fade-up text-primary-light text-sm font-semibold uppercase mb-4">
             Bringing Talent to Life
           </p>
-          <h1 className="font-heading text-6xl md:text-8xl font-bold text-white leading-none mb-6 uppercase">
+          <h1 className="animate-fade-up animation-delay-100 font-heading text-5xl sm:text-6xl md:text-8xl font-bold text-white leading-none mb-6 uppercase">
             SHAKTI<br />
             <span className="text-primary">EDUCATION</span><br />
             TRUST
           </h1>
-          <p className="text-gray-300 text-lg max-w-xl mb-10 leading-relaxed">
+          <p className="animate-fade-up animation-delay-200 text-blue-50/85 text-lg max-w-xl mb-10 leading-relaxed">
             Excellence in education since 1998. We nurture every child's unique potential in a caring, future-ready community.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/courses" className="btn-primary text-base px-8 py-4">
+          <div className="animate-fade-up animation-delay-300 flex flex-wrap gap-4">
+            <Link to="/courses" className="btn-primary inline-flex items-center gap-2 text-base px-8 py-4">
               EXPLORE COURSES
+              <LineIcon name="arrowRight" className="h-4 w-4" />
             </Link>
             <Link to="/scholarship" className="btn-outline text-base px-8 py-4">
               WIN SCHOLARSHIP
@@ -96,9 +112,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500">
-          <div className="w-px h-10 bg-gray-600 animate-pulse" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-blue-100/60">
+          <div className="w-px h-10 bg-blue-100/35 animate-pulse" />
           <span className="text-xs tracking-widest">SCROLL</span>
         </div>
       </section>
@@ -125,10 +140,10 @@ export default function Home() {
             <img
               src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=700"
               alt="Students learning"
-              className="rounded-2xl shadow-2xl w-full object-cover h-80"
+              className="rounded-lg shadow-2xl w-full object-cover h-80"
             />
-            <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-xl">
-              <p className="font-heading text-4xl font-bold">25+</p>
+            <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-lg shadow-xl">
+              <p className="font-heading text-4xl font-bold"><CountUp value="25+" /></p>
               <p className="text-sm font-medium">Years of Excellence</p>
             </div>
           </div>
@@ -147,14 +162,19 @@ export default function Home() {
               <Link
                 key={c.title}
                 to={c.link}
-                className={`${c.color} text-white rounded-2xl p-6 flex flex-col items-start gap-3 hover:opacity-90 transition shadow-md`}
+                className={`bg-gradient-to-br ${c.color} text-white rounded-lg p-6 flex min-h-52 flex-col items-start gap-3 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl`}
               >
-                <span className="text-4xl">{c.icon}</span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/15 text-white ring-1 ring-white/20">
+                  <LineIcon name={c.icon} className="h-7 w-7" />
+                </span>
                 <div>
                   <p className="font-heading text-xl font-bold uppercase">{c.title}</p>
                   <p className="text-sm opacity-80">{c.badge}</p>
                 </div>
-                <span className="mt-auto text-sm font-semibold underline">Learn More →</span>
+                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold">
+                  Learn More
+                  <LineIcon name="arrowRight" className="h-4 w-4" />
+                </span>
               </Link>
             ))}
           </div>
@@ -174,7 +194,7 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {results.map((r) => (
               <div key={r.label} className="text-center">
-                <p className="font-heading text-5xl font-bold mb-2">{r.number}</p>
+                <p className="font-heading text-5xl font-bold mb-2"><CountUp value={r.number} /></p>
                 <p className="text-blue-100 text-sm font-medium">{r.label}</p>
               </div>
             ))}
@@ -196,8 +216,10 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
-              <div key={i} className="group bg-gray-900 rounded-2xl p-6 hover:bg-primary transition-all duration-300 cursor-default">
-                <div className="text-4xl mb-4">{f.icon}</div>
+              <div key={i} className="group rounded-lg border border-white/10 bg-dark-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-primary cursor-default">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/15 text-primary-light ring-1 ring-white/10 group-hover:bg-white/15 group-hover:text-white">
+                  <LineIcon name={f.icon} className="h-7 w-7" />
+                </div>
                 <h3 className="font-heading text-xl font-bold text-white uppercase mb-2">{f.title}</h3>
                 <p className="text-gray-400 group-hover:text-blue-100 text-sm leading-relaxed transition">{f.desc}</p>
               </div>
@@ -215,11 +237,15 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 gap-10 items-start">
             {/* Mini calendar */}
-            <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-4">
-                <button className="text-gray-400 hover:text-primary">‹</button>
+                <button className="text-gray-400 hover:text-primary" aria-label="Previous month">
+                  <LineIcon name="chevronLeft" className="h-5 w-5" />
+                </button>
                 <h3 className="font-heading font-bold text-xl text-gray-900">SEPTEMBER 2025</h3>
-                <button className="text-gray-400 hover:text-primary">›</button>
+                <button className="text-gray-400 hover:text-primary" aria-label="Next month">
+                  <LineIcon name="chevronRight" className="h-5 w-5" />
+                </button>
               </div>
               <div className="grid grid-cols-7 text-center text-xs text-gray-500 font-semibold mb-2">
                 {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => <div key={d}>{d}</div>)}
@@ -262,7 +288,7 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl p-7 border border-gray-100">
+              <div key={i} className="bg-gray-50 rounded-lg p-7 border border-gray-100">
                 <div className="text-primary text-5xl font-serif leading-none mb-4">"</div>
                 <p className="text-gray-700 text-sm leading-relaxed mb-6 italic">{t.text}</p>
                 <div className="flex items-center gap-3">
@@ -290,19 +316,17 @@ export default function Home() {
             <h2 className="font-heading text-5xl font-bold text-gray-900 uppercase">QUICK LINK TO CONNECT</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: '📋', title: 'Registration Enquiry', desc: 'New students may click the link below to submit an inquiry form for admission.' },
-              { icon: '💰', title: 'Fee Payment', desc: 'Parents can click the link below and pay fee online. Online payment is safe and secure.' },
-              { icon: '👨‍👩‍👧', title: 'Parent Portal', desc: 'Parents of current Shakti Education trust students can access the parent portal.' },
-              { icon: '🔄', title: 'Online Re-Registration', desc: 'Parents of current Shakti Education trust students may re-register online for the next academic year.' },
-            ].map((item, i) => (
-              <div key={i} className={`rounded-2xl p-6 border-2 ${i === 1 ? 'bg-primary border-primary text-white' : 'bg-white border-gray-200 hover:border-primary transition'}`}>
-                <div className="text-3xl mb-3">{item.icon}</div>
+            {quickLinks.map((item, i) => (
+              <div key={i} className={`rounded-lg p-6 border ${i === 1 ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20' : 'bg-white border-gray-200 hover:border-primary transition'}`}>
+                <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-lg ${i === 1 ? 'bg-white/15 text-white' : 'bg-primary-light text-primary'}`}>
+                  <LineIcon name={item.icon} className="h-6 w-6" />
+                </div>
                 <h3 className={`font-heading font-bold text-lg mb-2 uppercase ${i === 1 ? 'text-white' : 'text-gray-900'}`}>{item.title}</h3>
                 <p className={`text-sm leading-relaxed ${i === 1 ? 'text-blue-100' : 'text-gray-500'}`}>{item.desc}</p>
                 {i === 1 && (
-                  <Link to="/fee-payment" className="mt-4 inline-block bg-white text-primary text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary-light transition">
-                    Pay Now →
+                  <Link to="/fee-payment" className="mt-4 inline-flex items-center gap-2 bg-dark-card text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary-dark transition">
+                    Pay Now
+                    <LineIcon name="arrowRight" className="h-4 w-4" />
                   </Link>
                 )}
               </div>
@@ -327,39 +351,42 @@ export default function Home() {
               href="https://wa.me/919100000000?text=Hello%2C%20I%20want%20to%20enquire%20about%20courses"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl transition"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-white">
-                <path d="M16.004 2C8.28 2 2 8.278 2 16c0 2.44.638 4.73 1.752 6.718L2 30l7.476-1.732A13.935 13.935 0 0 0 16.004 30C23.726 30 30 23.724 30 16 30 8.278 23.726 2 16.004 2zm0 2.154c6.534 0 11.842 5.306 11.842 11.846 0 6.538-5.308 11.844-11.842 11.844a11.78 11.78 0 0 1-5.998-1.638l-.43-.258-4.44 1.028.99-4.32-.282-.446A11.78 11.78 0 0 1 4.162 16c0-6.54 5.31-11.846 11.842-11.846zm-3.22 5.44a1.23 1.23 0 0 0-.87.396c-.3.326-1.14 1.11-1.14 2.71 0 1.6 1.164 3.144 1.326 3.36.162.216 2.28 3.488 5.526 4.754 2.718 1.068 3.27.856 3.858.8.588-.056 1.9-.776 2.168-1.524.27-.748.27-1.388.19-1.524-.08-.134-.294-.214-.618-.374-.324-.162-1.9-.938-2.196-1.044-.296-.108-.512-.162-.728.162-.216.324-.836 1.044-1.024 1.26-.188.216-.376.244-.7.082-.324-.162-1.366-.504-2.602-1.604-.962-.854-1.612-1.912-1.8-2.234-.188-.324-.02-.5.142-.66.146-.144.324-.374.486-.562.16-.188.212-.324.318-.54.106-.216.054-.406-.026-.568-.08-.162-.716-1.728-.98-2.368-.258-.622-.522-.524-.728-.532-.188-.006-.404-.008-.62-.008z" />
-              </svg>
+              <LineIcon name="message" className="h-5 w-5" />
               Chat on WhatsApp
             </a>
           </div>
 
           {enqStatus === 'success' ? (
-            <div className="bg-gray-800 rounded-2xl p-8 text-center border border-gray-700">
-              <div className="text-5xl mb-4">🎉</div>
+            <div className="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-primary/15 text-primary-light">
+                <LineIcon name="checkCircle" className="h-8 w-8" />
+              </div>
               <h3 className="font-heading text-2xl font-bold mb-2">Enquiry Received!</h3>
               <p className="text-gray-400 mb-5">Our counsellor will call you within 24 hours.</p>
-              <button onClick={() => setEnqStatus('')} className="btn-primary">Submit Another →</button>
+              <button onClick={() => setEnqStatus('')} className="btn-primary inline-flex items-center gap-2">
+                Submit Another
+                <LineIcon name="arrowRight" className="h-4 w-4" />
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleEnqSubmit} className="bg-gray-800 rounded-2xl p-8 border border-gray-700 space-y-4">
+            <form onSubmit={handleEnqSubmit} className="bg-gray-800 rounded-lg p-8 border border-gray-700 space-y-4">
               <h3 className="font-heading text-xl font-bold uppercase">Quick Enquiry</h3>
 
               <input
                 name="name" value={enqForm.name} onChange={handleEnqChange} required
-                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"
                 placeholder="Your Name *"
               />
               <input
                 name="phone" value={enqForm.phone} onChange={handleEnqChange} required
-                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+                className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"
                 placeholder="Phone Number *"
               />
               <select
                 name="course_interest" value={enqForm.course_interest} onChange={handleEnqChange}
-                className="w-full bg-gray-700 border border-gray-600 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"
               >
                 <option value="general">General Enquiry</option>
                 <option value="iit_jee">IIT-JEE</option>
@@ -372,8 +399,9 @@ export default function Home() {
                 <p className="text-red-400 text-xs">Submission failed. Please call us directly.</p>
               )}
 
-              <button type="submit" disabled={enqStatus === 'loading'} className="btn-primary w-full py-3">
-                {enqStatus === 'loading' ? 'Sending…' : 'Get Free Counselling →'}
+              <button type="submit" disabled={enqStatus === 'loading'} className="btn-primary w-full py-3 inline-flex items-center justify-center gap-2">
+                {enqStatus === 'loading' ? 'Sending…' : 'Get Free Counselling'}
+                {enqStatus !== 'loading' && <LineIcon name="arrowRight" className="h-4 w-4" />}
               </button>
             </form>
           )}
